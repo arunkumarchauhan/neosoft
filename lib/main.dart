@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             title: 'Flutter Demo',
             theme: buildThemeData(),
-            initialRoute: AppRouter.reset_password,
+            initialRoute: AppRouter.login,
             routes: {
               AppRouter.login: (_) => const LoginScreen(),
               AppRouter.register: (_) => const Register(),

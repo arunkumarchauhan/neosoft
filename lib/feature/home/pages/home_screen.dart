@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:neostore/feature/home/widgets/carousel_slider_widget.dart';
 import 'package:neostore/utils/models/drawer_item.dart';
-import 'package:neostore/feature/home/pages/widgets/carousel_slider_widget.dart';
 import 'package:neostore/utils/colors.dart';
 
 class HomeScreen extends StatelessWidget {
