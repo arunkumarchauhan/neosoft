@@ -1,7 +1,6 @@
 import 'package:either_dart/either.dart';
 import 'package:either_dart/src/either.dart';
 import 'package:neostore/core/user/data/datasource/user_remote_data_source.dart';
-import 'package:neostore/core/user/data/dto/user_response_dto.dart';
 import 'package:neostore/core/user/data/mapper/user_mapper.dart';
 import 'package:neostore/core/user/data/repositories/user_repository.dart';
 import 'package:neostore/core/user/domain/entity/user_entity.dart';
