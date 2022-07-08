@@ -47,3 +47,9 @@ Color getWhiteColor(double opacity) => Color.fromRGBO(255, 255, 255, opacity);
 
 final kMainRedColor = HexColor.fromHex("#E91C1A");
 final kDrawerBackGroundColour = HexColor.fromHex("#2c2b2c");
+final kLightGreyColor = Colors.grey.shade200;
+final kDarkGreyColor = Colors.grey;
+final kStarGlowingColor = HexColor.fromHex("#FFBA00");
+final kStarDimColor = HexColor.fromHex("#7F7F7F");
+
+final k7f7f7fColor = HexColor.fromHex("#7f7F7F");

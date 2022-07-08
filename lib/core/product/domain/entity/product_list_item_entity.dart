@@ -24,7 +24,7 @@ class ProductListItemEntity {
   int productCategoryId;
   String name;
   String producer;
-  int cost;
+  double cost;
   int rating;
   @JsonKey(name: "product_images")
   String productImages;

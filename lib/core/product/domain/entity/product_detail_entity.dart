@@ -21,18 +21,19 @@ class ProductDetailEntity {
   int rating;
   List<ProductImageEntity> productImages;
 
-  factory ProductDetailEntity.fromJson(Map<String, dynamic> json) =>
-      ProductDetailEntity(
-        id: json["id"],
-        productCategoryId: json["product_category_id"],
-        name: json["name"],
-        producer: json["producer"],
-        description: json["description"],
-        cost: json["cost"],
-        rating: json["rating"],
-        productImages: List<ProductImageEntity>.from(
-            json["product_images"].map((x) => ProductImageEntity.fromJson(x))),
-      );
+  factory ProductDetailEntity.fromJson(Map<String, dynamic> json) {
+    return ProductDetailEntity(
+      id: json["id"],
+      productCategoryId: json["product_category_id"],
+      name: json["name"],
+      producer: json["producer"],
+      description: json["description"],
+      cost: json["cost"],
+      rating: json["rating"],
+      productImages: List<ProductImageEntity>.from(
+          json["product_images"]?.map((x) => ProductImageEntity.fromJson(x))),
+    );
+  }
 
   Map<String, dynamic> toJson() => {
         "id": id,

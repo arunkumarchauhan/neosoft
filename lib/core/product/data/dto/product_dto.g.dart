@@ -19,7 +19,7 @@ ProductDTO _$ProductDTOFromJson(Map<String, dynamic> json) => ProductDTO(
       modified: json['modified'] as String?,
       productImages: json['product_images'] as String?,
     )..products = (json['products'] as List<dynamic>?)
-        ?.map((e) => ProductDTO.fromJson(e as Map<String, dynamic>))
+        ?.map((e) => ProductDTO.fromJson(e))
         .toList();
 
 Map<String, dynamic> _$ProductDTOToJson(ProductDTO instance) =>

@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:neostore/core/product/domain/di/product_list_injection.dart';
 import 'package:neostore/feature/home/widgets/carousel_slider_widget.dart';
+import 'package:neostore/feature/product_listing/controller/product_listing_bloc.dart';
+import 'package:neostore/feature/product_listing/controller/product_listing_event.dart';
+import 'package:neostore/feature/product_listing/controller/product_listing_state.dart';
+import 'package:neostore/utils/app_router.dart';
 import 'package:neostore/utils/models/drawer_item.dart';
 import 'package:neostore/utils/colors.dart';
 
@@ -53,13 +59,21 @@ class HomeScreen extends StatelessWidget {
         crossAxisSpacing: 13,
       ),
       children: [
-        buildCategoryStack(context,
-            text: "Tables",
-            assetLocation: "assets/images/dinner-table.png",
-            textRight: 16,
-            textTop: 16,
-            imageBottom: 16,
-            imageLeft: 16),
+        buildCategoryStack(
+          context,
+          text: "Tables",
+          assetLocation: "assets/images/dinner-table.png",
+          textRight: 16,
+          textTop: 16,
+          imageBottom: 16,
+          imageLeft: 16,
+          onTap: () {
+            context
+                .read<ProductListingBloc>()
+                .add(InitiateProductListFetchEvent(productCategoryId: 1));
+            Navigator.pushNamed(context, AppRouter.product_list);
+          },
+        ),
         buildCategoryStack(
           context,
           text: "Sofas",
@@ -68,6 +82,12 @@ class HomeScreen extends StatelessWidget {
           textLeft: 16,
           imageRight: 15,
           imageTop: 16,
+          onTap: () {
+            context
+                .read<ProductListingBloc>()
+                .add(InitiateProductListFetchEvent(productCategoryId: 2));
+            Navigator.pushNamed(context, AppRouter.product_list);
+          },
         ),
         buildCategoryStack(
           context,
@@ -77,6 +97,12 @@ class HomeScreen extends StatelessWidget {
           textLeft: 16,
           imageRight: 16,
           imageBottom: 16,
+          onTap: () {
+            context
+                .read<ProductListingBloc>()
+                .add(InitiateProductListFetchEvent(productCategoryId: 3));
+            Navigator.pushNamed(context, AppRouter.product_list);
+          },
         ),
         buildCategoryStack(
           context,
@@ -86,6 +112,12 @@ class HomeScreen extends StatelessWidget {
           textRight: 16,
           imageLeft: 16,
           imageTop: 16,
+          onTap: () {
+            context
+                .read<ProductListingBloc>()
+                .add(InitiateProductListFetchEvent(productCategoryId: 4));
+            Navigator.pushNamed(context, AppRouter.product_list);
+          },
         ),
       ],
     );
@@ -101,11 +133,10 @@ class HomeScreen extends StatelessWidget {
       double? textRight,
       double? textLeft,
       double? textTop,
-      double? textBottom}) {
+      double? textBottom,
+      required Function onTap}) {
     return GestureDetector(
-      onTap: () {
-        print("Pressed");
-      },
+      onTap: () => onTap(),
       child: Stack(
         children: [
           Container(

@@ -13,7 +13,7 @@ ProductListItemEntity _$ProductListItemEntityFromJson(
       productCategoryId: json['product_category_id'] as int,
       name: json['name'] as String,
       producer: json['producer'] as String,
-      cost: json['cost'] as int,
+      cost: (json['cost'] as num).toDouble(),
       rating: json['rating'] as int,
       productImages: json['product_images'] as String,
     );

@@ -1,4 +1,5 @@
-import 'package:json_annotation/json_annotation.dart';
+import 'dart:convert';
+
 import 'package:neostore/core/product/data/dto/product_dto.dart';
 
 class ProductsListResponseDTO {
@@ -10,15 +11,19 @@ class ProductsListResponseDTO {
   String? userMessage;
   int? status;
   List<ProductDTO>? products;
-  factory ProductsListResponseDTO.fromJson(Map<String, dynamic> json) =>
+  factory ProductsListResponseDTO.fromJson(json) {
+    return ProductsListResponseDTO.fromMap(jsonDecode(json));
+  }
+
+  factory ProductsListResponseDTO.fromMap(Map<String, dynamic> json) =>
       _$ProductsListResponseDTOFromJson(json);
   Map<String, dynamic> toJson() => _$ProductsListResponseDTOToJson(this);
 }
 
 ProductsListResponseDTO _$ProductsListResponseDTOFromJson(
     Map<String, dynamic> json) {
-  if (json["data"] == false) {
-    json["data"] = [];
+  if (json['data'] == false) {
+    json['data'] = [];
   }
   return ProductsListResponseDTO(
     status: json['status'] as int?,

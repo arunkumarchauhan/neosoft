@@ -13,13 +13,15 @@ class ProductImage {
   String? created;
   String? modified;
 
-  factory ProductImage.fromJson(Map<String, dynamic> json) => ProductImage(
-        id: json["id"],
-        productId: json["product_id"],
-        image: json["image"],
-        created: json["created"],
-        modified: json["modified"],
-      );
+  factory ProductImage.fromJson(Map<String, dynamic> json) {
+    return ProductImage(
+      id: json["id"],
+      productId: json["product_id"],
+      image: json["image"],
+      created: json["created"],
+      modified: json["modified"],
+    );
+  }
 
   Map<String, dynamic> toJson() => {
         "id": id,

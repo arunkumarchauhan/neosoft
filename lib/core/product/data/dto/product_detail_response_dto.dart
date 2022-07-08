@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:neostore/core/product/data/dto/product_detail_dto.dart';
 
 class ProductDetailResponseDTO {
@@ -8,7 +10,9 @@ class ProductDetailResponseDTO {
   int? status;
   ProductDetailDTO? productDetailDTO;
 
-  factory ProductDetailResponseDTO.fromJson(Map<String, dynamic> json) =>
+  factory ProductDetailResponseDTO.fromJson(json) =>
+      ProductDetailResponseDTO.fromMap(jsonDecode(json));
+  factory ProductDetailResponseDTO.fromMap(Map<String, dynamic> json) =>
       _$ProductDetailResponseDTOFromJson(json);
 
   Map<String, dynamic> toJson() => _$ProductDetailResponseDTOToJson(this);
@@ -23,7 +27,7 @@ ProductDetailResponseDTO _$ProductDetailResponseDTOFromJson(
     status: json['status'] as int?,
     productDetailDTO: json['data'] == null
         ? null
-        : ProductDetailDTO.fromJson(json['data'] as Map<String, dynamic>),
+        : ProductDetailDTO.fromMap(json['data'] as Map<String, dynamic>),
     message: json['message'] as String?,
     userMessage: json['user_msg'] as String?,
   );

@@ -3,9 +3,10 @@ import 'package:neostore/core/product/domain/entity/product_detail_entity.dart';
 import 'package:neostore/core/product/data/repository/product_repository.dart';
 import 'package:neostore/utils/models/failure.dart';
 
-class GetSelectedProductDetail {
+class GetSelectedProductDetailUseCase {
   ProductRepository _productRepository;
-  GetSelectedProductDetail({required ProductRepository productRepository})
+  GetSelectedProductDetailUseCase(
+      {required ProductRepository productRepository})
       : _productRepository = productRepository;
   Future<Either<Failure, ProductDetailEntity>> getProductDetail(
       {required int productId}) async {

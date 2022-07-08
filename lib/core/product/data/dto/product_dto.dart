@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:json_annotation/json_annotation.dart';
 part 'product_dto.g.dart';
 
@@ -35,7 +37,9 @@ class ProductDTO {
 
   List<ProductDTO>? products;
 
-  factory ProductDTO.fromJson(Map<String, dynamic> json) =>
+  factory ProductDTO.fromJson(json) => ProductDTO.fromMap(json);
+
+  factory ProductDTO.fromMap(Map<String, dynamic> json) =>
       _$ProductDTOFromJson(json);
   Map<String, dynamic> toJson() => _$ProductDTOToJson(this);
 }
