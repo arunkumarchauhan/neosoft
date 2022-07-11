@@ -1,9 +1,11 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
+import 'package:neostore/services/api_service.dart';
 import './product/domain/di/product_list_injection.dart'
     as product_list_injection;
 import './product/domain/di/product_detail_injection.dart'
     as product_detail_injection;
+import './orders/domain/di/order_list_injection.dart' as orders_list_injection;
 
 final locator = GetIt.instance;
 void inject() {
@@ -19,6 +21,9 @@ void inject() {
     }));
   locator.registerLazySingleton(() => _dio);
 
+  locator.registerLazySingleton(() => ApiService());
+
   product_list_injection.inject();
   product_detail_injection.inject();
+  orders_list_injection.inject();
 }

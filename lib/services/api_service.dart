@@ -10,7 +10,9 @@ class ApiService {
   Future<Response> getRequest(
       {String subUrl = "", Map<String, dynamic> params = const {}}) async {
     String url = "$kBaseUrl$subUrl";
-    Response response = await _dio.get(url, queryParameters: params);
+    Response response = await _dio.get(url,
+        queryParameters: params,
+        options: Options(headers: {"access_token": "61827d01a6136"}));
     return response;
   }
 

@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:neostore/core/orders/domain/entity/order_list_item_entity.dart';
+import 'package:neostore/feature/my_order/controller/order_list_bloc.dart';
+import 'package:neostore/feature/my_order/controller/order_list_state.dart';
 import 'package:neostore/utils/colors.dart';
 import 'package:neostore/utils/constants.dart';
 
@@ -34,45 +38,70 @@ class MyOrdersListPage extends StatelessWidget {
           ),
         ),
       ),
-      body: ListView.separated(
-          itemCount: 5,
-          itemBuilder: (BuildContext context, int index) {
-            return ListTile(
-              onTap: () {},
-              title: Text(
-                "Order ID : 1587",
-                style: TextStyle(
-                    fontSize: 17,
-                    color: k1c1c1cColor,
-                    fontWeight: FontWeight.w500),
-              ),
-              contentPadding:
-                  const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-              subtitle: Padding(
-                padding: const EdgeInsets.only(top: 10),
-                child: Text(
-                  "Order Date: 08 Aug 15",
-                  style: TextStyle(
-                      fontSize: 17,
-                      color: k4f4f4fColor,
-                      fontWeight: FontWeight.w100),
-                ),
-              ),
-              trailing: Text(
-                "${formatCurrency.format(45.00)} ",
-                style: TextStyle(
-                  fontWeight: FontWeight.w500,
-                  color: k333333Color,
-                ),
-              ),
-            );
-          },
-          separatorBuilder: (BuildContext context, int index) {
-            return Divider(
-              thickness: 2,
-              color: kLightGreyColor,
-            );
-          }),
+      body: BlocBuilder<OrderListingBloc, OrderListingState>(
+          builder: (BuildContext context, OrderListingState state) {
+        if (state is OrdersListLoadingState) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        } else if (state is OrderListFetchSuccessState) {
+          final orders = state.orders;
+          return ListView.separated(
+              itemCount: orders.length,
+              itemBuilder: (BuildContext context, int index) {
+                return _buildOrderListTile(orders[index]);
+              },
+              separatorBuilder: (BuildContext context, int index) {
+                return Divider(
+                  thickness: 2,
+                  color: kLightGreyColor,
+                );
+              });
+        } else if (state is OrderListFetchFailedState) {
+          return Center(
+            child: Text(
+              state.failure.message,
+              style: TextStyle(color: Colors.red),
+            ),
+          );
+        }
+        return Container();
+      }),
+    );
+  }
+
+  ListTile _buildOrderListTile(OrderListItemEntity order) {
+    return ListTile(
+      onTap: () {},
+      title: Text(
+        "Order ID : ${order.id}",
+        style: TextStyle(
+            fontFamily: "Gotham",
+            fontSize: 17,
+            color: k1c1c1cColor,
+            fontWeight: FontWeight.w500),
+      ),
+      contentPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+      subtitle: Padding(
+        padding: const EdgeInsets.only(top: 10),
+        child: Text(
+          "Order Date: ${order.created}",
+          style: TextStyle(
+              fontSize: 17,
+              color: k4f4f4fColor,
+              fontFamily: "Gotham",
+              fontWeight: FontWeight.w100),
+        ),
+      ),
+      trailing: Text(
+        "${formatCurrencyRupeesSymbol.format(order.cost)} ",
+        style: TextStyle(
+          fontFamily: "Gotham",
+          fontWeight: FontWeight.w100,
+          color: k333333Color,
+          fontSize: 20,
+        ),
+      ),
     );
   }
 }

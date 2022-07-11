@@ -1,27 +1,29 @@
 import 'dart:convert';
 
-class ProductListResponseDto {
-  ProductListResponseDto({
+import 'package:neostore/core/orders/data/dto/order_dto.dart';
+
+class OrderListResponseDto {
+  OrderListResponseDto({
     this.status,
-    this.data,
+    this.orderDtoList,
     this.message,
     this.userMsg,
   });
 
   int? status;
-  List<OrderDTO>? data;
+  List<OrderDTO>? orderDtoList;
   String? message;
   String? userMsg;
 
-  factory ProductListResponseDto.fromJson(String str) =>
-      ProductListResponseDto.fromMap(json.decode(str));
+  factory OrderListResponseDto.fromJson(String str) =>
+      OrderListResponseDto.fromMap(json.decode(str));
 
   String toJson() => json.encode(toMap());
 
-  factory ProductListResponseDto.fromMap(Map<String, dynamic> json) =>
-      ProductListResponseDto(
+  factory OrderListResponseDto.fromMap(Map<String, dynamic> json) =>
+      OrderListResponseDto(
         status: json["status"],
-        data: json["data"] == null
+        orderDtoList: json["data"] == null
             ? null
             : List<OrderDTO>.from(json["data"].map((x) => OrderDTO.fromMap(x))),
         message: json["message"],
@@ -30,38 +32,10 @@ class ProductListResponseDto {
 
   Map<String, dynamic> toMap() => {
         "status": status,
-        "data": data == null
+        "data": orderDtoList == null
             ? null
-            : List<dynamic>.from(data!.map((x) => x.toMap())),
+            : List<dynamic>.from(orderDtoList!.map((x) => x.toMap())),
         "message": message,
         "user_msg": userMsg,
-      };
-}
-
-class OrderDTO {
-  OrderDTO({
-    this.id,
-    this.cost,
-    this.created,
-  });
-
-  int? id;
-  int? cost;
-  String? created;
-
-  factory OrderDTO.fromJson(String str) => OrderDTO.fromMap(json.decode(str));
-
-  String toJson() => json.encode(toMap());
-
-  factory OrderDTO.fromMap(Map<String, dynamic> json) => OrderDTO(
-        id: json["id"],
-        cost: json["cost"],
-        created: json["created"],
-      );
-
-  Map<String, dynamic> toMap() => {
-        "id": id,
-        "cost": cost,
-        "created": created,
       };
 }

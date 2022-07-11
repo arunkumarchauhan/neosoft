@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:neostore/feature/home/pages/home_screen.dart';
+import 'package:neostore/feature/my_order/controller/order_list_bloc.dart';
 import 'package:neostore/feature/my_order/pages/order_detail_page.dart';
 import 'package:neostore/feature/my_order/pages/order_list_page.dart';
 import 'package:neostore/feature/product_detail/controller/product_detail_bloc.dart';
@@ -34,6 +35,9 @@ class MyApp extends StatelessWidget {
         BlocProvider<ProductDetailBloc>(
           create: (BuildContext context) => di.locator<ProductDetailBloc>(),
         ),
+        BlocProvider<OrderListingBloc>(
+          create: (BuildContext context) => di.locator<OrderListingBloc>(),
+        ),
       ],
       child: ScreenUtilInit(
           designSize: const Size(1080, 1920),
@@ -42,7 +46,7 @@ class MyApp extends StatelessWidget {
               debugShowCheckedModeBanner: false,
               title: 'Flutter Demo',
               theme: buildThemeData(),
-              initialRoute: AppRouter.my_orders,
+              initialRoute: AppRouter.home,
               routes: {
                 AppRouter.login: (_) => const LoginScreen(),
                 AppRouter.register: (_) => const Register(),

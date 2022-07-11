@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:neostore/core/product/domain/di/product_list_injection.dart';
 import 'package:neostore/feature/home/widgets/carousel_slider_widget.dart';
+import 'package:neostore/feature/my_order/controller/order_list_bloc.dart';
+import 'package:neostore/feature/my_order/controller/order_list_event.dart';
 import 'package:neostore/feature/product_listing/controller/product_listing_bloc.dart';
 import 'package:neostore/feature/product_listing/controller/product_listing_event.dart';
 import 'package:neostore/feature/product_listing/controller/product_listing_state.dart';
@@ -250,10 +252,21 @@ class HomeScreen extends StatelessWidget {
         itemCount: DrawerItems.drawers.length);
   }
 
+  void getDrawerAction(BuildContext context, String itemName) {
+    switch (itemName) {
+      case "Cupboards":
+        context.read<OrderListingBloc>().add(FetchOrderListEvent());
+        Navigator.of(context).pushNamed(AppRouter.my_orders);
+        return;
+      default:
+        print("No Actions performed");
+    }
+  }
+
   ListTile _buildDrawerListTile(
       DrawerItems item, BuildContext context, int index) {
     return ListTile(
-        onTap: () {},
+        onTap: () => getDrawerAction(context, item.name),
         leading: Icon(
           item.icon,
           size: 40,

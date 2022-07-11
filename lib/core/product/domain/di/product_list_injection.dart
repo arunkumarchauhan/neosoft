@@ -8,7 +8,7 @@ import 'package:neostore/services/api_service.dart';
 
 void inject() {
   final locator = GetIt.instance;
-  locator.registerLazySingleton(() => ApiService());
+  // locator.registerLazySingleton(() => ApiService());
   locator.registerLazySingleton(
       () => ProductApiService(apiService: locator<ApiService>()));
   locator.registerLazySingleton(() => ProductRepositoryImplementation(

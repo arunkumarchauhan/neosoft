@@ -1,24 +1,23 @@
 import 'dart:convert';
 
-class OrderEntity {
-  OrderEntity({
+class OrderDTO {
+  OrderDTO({
     this.id,
     this.cost,
     this.created,
   });
 
   int? id;
-  int? cost;
+  double? cost;
   String? created;
 
-  factory OrderEntity.fromJson(String str) =>
-      OrderEntity.fromMap(json.decode(str));
+  factory OrderDTO.fromJson(String str) => OrderDTO.fromMap(json.decode(str));
 
   String toJson() => json.encode(toMap());
 
-  factory OrderEntity.fromMap(Map<String, dynamic> json) => OrderEntity(
+  factory OrderDTO.fromMap(Map<String, dynamic> json) => OrderDTO(
         id: json["id"],
-        cost: json["cost"],
+        cost: double.tryParse((json["cost"] ?? "0").toString()),
         created: json["created"],
       );
 

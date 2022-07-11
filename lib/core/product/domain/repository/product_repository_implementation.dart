@@ -42,7 +42,7 @@ class ProductRepositoryImplementation extends ProductRepository {
         return Right(
             ProductMapper.mapProductListResponseDtoToProductListItemEntityList(
                 response.products!));
-      } else if (response.status == 401) {
+      } else if (response.status! >= 400) {
         return Right([]);
       } else {
         return Left(Failure("${response.status} : ${response.userMessage}"));
