@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:neostore/utils/constants.dart';
 
 class DrawerItems {
   final String name;
@@ -13,7 +14,7 @@ class DrawerItems {
       DrawerItems(icon: Icons.chair_sharp, name: "Sofas"),
       DrawerItems(icon: Icons.chair_rounded, name: "Chairs"),
       DrawerItems(icon: Icons.add_box_outlined, name: "Cupboards"),
-      DrawerItems(icon: Icons.account_box, name: "My Account"),
+      DrawerItems(icon: Icons.account_box, name: kMyAccount),
       DrawerItems(icon: Icons.location_on_sharp, name: "Store Locator"),
       DrawerItems(icon: FontAwesomeIcons.noteSticky, name: "My Orders"),
       DrawerItems(icon: Icons.logout, name: "Logout"),

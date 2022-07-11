@@ -22,7 +22,7 @@ class OrderDetailMetaDataDto {
   factory OrderDetailMetaDataDto.fromMap(Map<String, dynamic> json) =>
       OrderDetailMetaDataDto(
         id: json["id"],
-        cost: (json["cost"] as double?)?.toDouble(),
+        cost: double.tryParse((json["cost"] ?? "0").toString()),
         address: json["address"],
         orderDetails: json["order_details"] == null
             ? null

@@ -21,16 +21,17 @@ class OrderDetailMetaDataEntity {
 
   String toJson() => json.encode(toMap());
 
-  factory OrderDetailMetaDataEntity.fromMap(Map<String, dynamic> json) =>
-      OrderDetailMetaDataEntity(
-        id: json["id"],
-        cost: (json["cost"] as double?)?.toDouble(),
-        address: json["address"],
-        orderDetails: json["order_details"] == null
-            ? null
-            : List<OrderDetailEntity>.from(
-                json["order_details"].map((x) => OrderDetailEntity.fromMap(x))),
-      );
+  factory OrderDetailMetaDataEntity.fromMap(Map<String, dynamic> json) {
+    return OrderDetailMetaDataEntity(
+      id: json["id"],
+      cost: json["cost"] as double?,
+      address: json["address"],
+      orderDetails: json["order_details"] == null
+          ? null
+          : List<OrderDetailEntity>.from(
+              json["order_details"].map((x) => OrderDetailEntity.fromMap(x))),
+    );
+  }
 
   Map<String, dynamic> toMap() => {
         "id": id,

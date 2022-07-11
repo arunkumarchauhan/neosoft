@@ -3,12 +3,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:neostore/core/product/domain/di/product_list_injection.dart';
 import 'package:neostore/feature/home/widgets/carousel_slider_widget.dart';
-import 'package:neostore/feature/my_order/controller/order_list_bloc.dart';
-import 'package:neostore/feature/my_order/controller/order_list_event.dart';
+import 'package:neostore/feature/my_order/controller/order_list/order_list_bloc.dart';
+import 'package:neostore/feature/my_order/controller/order_list/order_list_event.dart';
 import 'package:neostore/feature/product_listing/controller/product_listing_bloc.dart';
 import 'package:neostore/feature/product_listing/controller/product_listing_event.dart';
 import 'package:neostore/feature/product_listing/controller/product_listing_state.dart';
 import 'package:neostore/utils/app_router.dart';
+import 'package:neostore/utils/constants.dart';
 import 'package:neostore/utils/models/drawer_item.dart';
 import 'package:neostore/utils/colors.dart';
 
@@ -172,7 +173,7 @@ class HomeScreen extends StatelessWidget {
 
   Drawer _buildDrawer(BuildContext context) {
     return Drawer(
-      backgroundColor: kDrawerBackGroundColour,
+      backgroundColor: k2c2b2bColor,
       child: SingleChildScrollView(
         child: Column(
           children: [
@@ -254,7 +255,7 @@ class HomeScreen extends StatelessWidget {
 
   void getDrawerAction(BuildContext context, String itemName) {
     switch (itemName) {
-      case "Cupboards":
+      case kMyOrders:
         context.read<OrderListingBloc>().add(FetchOrderListEvent());
         Navigator.of(context).pushNamed(AppRouter.my_orders);
         return;

@@ -31,7 +31,7 @@ class OrderDetailDto {
         orderId: json["order_id"],
         productId: json["product_id"],
         quantity: json["quantity"],
-        total: (json["total"] as double?)?.toDouble(),
+        total: double.tryParse((json["total"] ?? "0").toString()),
         prodName: json["prod_name"],
         prodCatName: json["prod_cat_name"],
         prodImage: json["prod_image"],

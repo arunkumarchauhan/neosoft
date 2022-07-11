@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:neostore/feature/home/pages/home_screen.dart';
-import 'package:neostore/feature/my_order/controller/order_list_bloc.dart';
+import 'package:neostore/feature/my_order/controller/order_detail/order_detail_bloc.dart';
+import 'package:neostore/feature/my_order/controller/order_list/order_list_bloc.dart';
 import 'package:neostore/feature/my_order/pages/order_detail_page.dart';
 import 'package:neostore/feature/my_order/pages/order_list_page.dart';
 import 'package:neostore/feature/product_detail/controller/product_detail_bloc.dart';
@@ -37,6 +38,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider<OrderListingBloc>(
           create: (BuildContext context) => di.locator<OrderListingBloc>(),
+        ),
+        BlocProvider<OrderDetailBloc>(
+          create: (BuildContext context) => di.locator<OrderDetailBloc>(),
         ),
       ],
       child: ScreenUtilInit(

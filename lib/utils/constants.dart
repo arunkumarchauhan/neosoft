@@ -69,3 +69,6 @@ final formatCurrency = new NumberFormat.simpleCurrency(
     locale: "en_IN", name: "Rs", decimalDigits: 2);
 final formatCurrencyRupeesSymbol =
     new NumberFormat.simpleCurrency(locale: "en_IN", decimalDigits: 2);
+
+const kMyAccount = "My Account";
+const kMyOrders = "My Orders";

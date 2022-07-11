@@ -20,7 +20,6 @@ class OrderApiService {
 
     final Response response =
         await _apiService.getRequest(subUrl: subUrl, params: params);
-
     return OrderDetailResponseDto.fromJson(response.data!);
   }
 }

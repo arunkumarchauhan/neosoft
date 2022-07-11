@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:neostore/core/orders/domain/entity/order_list_item_entity.dart';
-import 'package:neostore/feature/my_order/controller/order_list_bloc.dart';
-import 'package:neostore/feature/my_order/controller/order_list_state.dart';
+import 'package:neostore/feature/my_order/controller/order_detail/order_detail_bloc.dart';
+import 'package:neostore/feature/my_order/controller/order_detail/order_detail_events.dart';
+import 'package:neostore/feature/my_order/controller/order_list/order_list_bloc.dart';
+import 'package:neostore/feature/my_order/controller/order_list/order_list_state.dart';
+import 'package:neostore/utils/app_router.dart';
 import 'package:neostore/utils/colors.dart';
 import 'package:neostore/utils/constants.dart';
 
@@ -49,7 +52,7 @@ class MyOrdersListPage extends StatelessWidget {
           return ListView.separated(
               itemCount: orders.length,
               itemBuilder: (BuildContext context, int index) {
-                return _buildOrderListTile(orders[index]);
+                return _buildOrderListTile(orders[index], context);
               },
               separatorBuilder: (BuildContext context, int index) {
                 return Divider(
@@ -70,9 +73,14 @@ class MyOrdersListPage extends StatelessWidget {
     );
   }
 
-  ListTile _buildOrderListTile(OrderListItemEntity order) {
+  ListTile _buildOrderListTile(
+      OrderListItemEntity order, BuildContext context) {
     return ListTile(
-      onTap: () {},
+      onTap: () {
+        BlocProvider.of<OrderDetailBloc>(context)
+            .add(FetchOrderDetailEvent(orderId: order.id!));
+        Navigator.pushNamed(context, AppRouter.order_detail);
+      },
       title: Text(
         "Order ID : ${order.id}",
         style: TextStyle(

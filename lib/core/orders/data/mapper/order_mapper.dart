@@ -15,6 +15,7 @@ class OrderMapper {
   static OrderDetailMetaDataEntity
       mapOrderDetailResponseDtoToOrderDetailMetaDataEntity(
           OrderDetailResponseDto dto) {
-    return OrderDetailMetaDataEntity.fromMap(dto.toMap());
+    return OrderDetailMetaDataEntity.fromMap(
+        dto.orderDetailResponseDto!.toMap());
   }
 }

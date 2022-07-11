@@ -33,29 +33,29 @@ class OrderRepositoryImplementation extends OrderRepository {
 
   @override
   Future<Either<Failure, List<OrderListItemEntity>>> getOrdersList() async {
-    // try {
-    final response = await _apiService.getOrdersList();
+    try {
+      final response = await _apiService.getOrdersList();
 
-    if (response.status == 200) {
-      return Right(
-          OrderMapper.mapOrderListResponseDtoToOrderListItemEntity(response));
-    } else if (response.status! >= 400) {
-      return Left(Failure(response.userMsg!));
-    } else {
-      return Left(Failure("${response.status} : ${response.userMsg}"));
+      if (response.status == 200) {
+        return Right(
+            OrderMapper.mapOrderListResponseDtoToOrderListItemEntity(response));
+      } else if (response.status! >= 400) {
+        return Left(Failure(response.userMsg!));
+      } else {
+        return Left(Failure("${response.status} : ${response.userMsg}"));
+      }
+    } on SocketException {
+      return Left(Failure("No Internet"));
+    } on DioError catch (e) {
+      if (e.type == DioErrorType.connectTimeout) {
+        return Left(Failure("Connection Timeout"));
+      }
+      print(e);
+      return Left(Failure("Something Went Wrong"));
+    } catch (e) {
+      print("Exception Print :  $e");
+
+      return Left(Failure("${e.toString().substring(0, 100)}"));
     }
-    // } on SocketException {
-    //   return Left(Failure("No Internet"));
-    // } on DioError catch (e) {
-    //   if (e.type == DioErrorType.connectTimeout) {
-    //     return Left(Failure("Connection Timeout"));
-    //   }
-    //   print(e);
-    //   return Left(Failure("Something Went Wrong"));
-    // } catch (e) {
-    //   print("Exception Custom $e");
-    //
-    //   return Left(Failure("${e.toString().substring(0, 100)}"));
-    // }
   }
 }

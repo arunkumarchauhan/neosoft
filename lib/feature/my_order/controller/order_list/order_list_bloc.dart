@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:neostore/core/orders/domain/usecase/get_orders_list_usecase.dart';
-import 'package:neostore/feature/my_order/controller/order_list_event.dart';
-import 'package:neostore/feature/my_order/controller/order_list_state.dart';
+import 'package:neostore/feature/my_order/controller/order_list/order_list_event.dart';
+import 'package:neostore/feature/my_order/controller/order_list/order_list_state.dart';
 
 class OrderListingBloc extends Bloc<OrderListingEvent, OrderListingState> {
   GetOrderstListUseCase _useCase;
