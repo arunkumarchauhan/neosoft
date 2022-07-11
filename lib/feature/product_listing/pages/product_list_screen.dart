@@ -76,6 +76,7 @@ class _ProductListPageState extends State<ProductListPage> {
       ),
       body: BlocBuilder<ProductListingBloc, ProductListingState>(
           builder: (context, state) {
+        print(state);
         if (state is ProductListFetchSuccessState) {
           return ListView.separated(
               controller: _scrollController,

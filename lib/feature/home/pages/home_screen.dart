@@ -259,6 +259,30 @@ class HomeScreen extends StatelessWidget {
         context.read<OrderListingBloc>().add(FetchOrderListEvent());
         Navigator.of(context).pushNamed(AppRouter.my_orders);
         return;
+      case kTables:
+        context
+            .read<ProductListingBloc>()
+            .add(InitiateProductListFetchEvent(productCategoryId: 1));
+        Navigator.pushNamed(context, AppRouter.product_list);
+        return;
+      case kMyChairs:
+        context
+            .read<ProductListingBloc>()
+            .add(InitiateProductListFetchEvent(productCategoryId: 3));
+        Navigator.pushNamed(context, AppRouter.product_list);
+        return;
+      case kSofas:
+        context
+            .read<ProductListingBloc>()
+            .add(InitiateProductListFetchEvent(productCategoryId: 2));
+        Navigator.pushNamed(context, AppRouter.product_list);
+        return;
+      case kCupboards:
+        context
+            .read<ProductListingBloc>()
+            .add(InitiateProductListFetchEvent(productCategoryId: 4));
+        Navigator.pushNamed(context, AppRouter.product_list);
+        return;
       default:
         print("No Actions performed");
     }

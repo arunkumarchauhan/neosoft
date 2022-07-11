@@ -72,3 +72,10 @@ final formatCurrencyRupeesSymbol =
 
 const kMyAccount = "My Account";
 const kMyOrders = "My Orders";
+const kSofas = "Sofas";
+const kTables = "Tables";
+const kMyCart = "My Cart";
+const kMyChairs = "Chairs";
+const kCupboards = "Cupboards";
+const kStoreLocators = "Store Locator";
+const kLogOut = "Logout";

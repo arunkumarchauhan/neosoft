@@ -9,15 +9,15 @@ class DrawerItems {
 
   static List<DrawerItems> get drawers {
     return [
-      DrawerItems(icon: Icons.add_shopping_cart, name: "My Cart"),
-      DrawerItems(icon: Icons.table_restaurant_outlined, name: "Tables"),
-      DrawerItems(icon: Icons.chair_sharp, name: "Sofas"),
-      DrawerItems(icon: Icons.chair_rounded, name: "Chairs"),
-      DrawerItems(icon: Icons.add_box_outlined, name: "Cupboards"),
+      DrawerItems(icon: Icons.add_shopping_cart, name: kMyCart),
+      DrawerItems(icon: Icons.table_restaurant_outlined, name: kTables),
+      DrawerItems(icon: Icons.chair_sharp, name: kSofas),
+      DrawerItems(icon: Icons.chair_rounded, name: kMyChairs),
+      DrawerItems(icon: Icons.add_box_outlined, name: kCupboards),
       DrawerItems(icon: Icons.account_box, name: kMyAccount),
-      DrawerItems(icon: Icons.location_on_sharp, name: "Store Locator"),
-      DrawerItems(icon: FontAwesomeIcons.noteSticky, name: "My Orders"),
-      DrawerItems(icon: Icons.logout, name: "Logout"),
+      DrawerItems(icon: Icons.location_on_sharp, name: kStoreLocators),
+      DrawerItems(icon: FontAwesomeIcons.noteSticky, name: kMyOrders),
+      DrawerItems(icon: Icons.logout, name: kLogOut),
     ];
   }
 }
