@@ -272,6 +272,8 @@ class ProductDetailPage extends StatelessWidget {
               child: Form(
             key: _formKey,
             child: BaseTextFormField(
+              textColor: Colors.black,
+              textInputType: TextInputType.number,
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return "Value Cannot be Empty";

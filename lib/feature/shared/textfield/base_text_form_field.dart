@@ -10,7 +10,8 @@ class BaseTextFormField extends StatelessWidget {
       this.hintText,
       this.textInputType,
       this.controller,
-      this.obscureText})
+      this.obscureText,
+      this.textColor})
       : super(key: key);
   final String? errorText;
   final IconData? icon;
@@ -19,6 +20,7 @@ class BaseTextFormField extends StatelessWidget {
   bool? obscureText;
   TextEditingController? controller;
   TextInputType? textInputType;
+  Color? textColor;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +28,11 @@ class BaseTextFormField extends StatelessWidget {
       height: 200.h,
       padding: EdgeInsets.symmetric(horizontal: 40.w),
       child: TextFormField(
-        style: const TextStyle(color: Colors.white),
+        style: TextStyle(
+            color: textColor ?? Colors.white,
+            fontSize: 20,
+            fontWeight: FontWeight.w500,
+            fontFamily: "Gotham"),
         obscureText: obscureText ?? false,
         validator: validator == null
             ? (String? str) {}
