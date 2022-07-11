@@ -53,3 +53,8 @@ final kStarGlowingColor = HexColor.fromHex("#FFBA00");
 final kStarDimColor = HexColor.fromHex("#7F7F7F");
 
 final k7f7f7fColor = HexColor.fromHex("#7f7F7F");
+final k2c2b2bColor = HexColor.fromHex("#2c2b2b");
+final k1c1c1cColor = HexColor.fromHex("#1c1c1c");
+final k4f4f4fColor = HexColor.fromHex("#4f4f4f");
+final k333333Color = HexColor.fromHex("#333333");
+final k6b6b6bColor = HexColor.fromHex("#6b6b6b");

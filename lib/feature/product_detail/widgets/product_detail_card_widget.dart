@@ -67,7 +67,7 @@ class _ProductDetailCardWidgetState extends State<ProductDetailCardWidget> {
                 itemBuilder: (context, index) {
                   return Image.network(
                     widget.product.productImages[index].image,
-                    fit: BoxFit.fill,
+                    fit: BoxFit.fitHeight,
                     errorBuilder: (context, _, stackTrace) => const Center(
                       child: Text("Image Could Not be Loaded"),
                     ),
@@ -106,7 +106,7 @@ class _ProductDetailCardWidgetState extends State<ProductDetailCardWidget> {
                   ),
                   child: Image.network(
                     widget.product.productImages[index].image,
-                    fit: BoxFit.fill,
+                    fit: BoxFit.fitHeight,
                     width: 230.w,
                     height: 200.h,
                     errorBuilder: (_, __, ___) => const Center(

@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:neostore/core/product/domain/entity/product_detail_entity.dart';
 import 'package:neostore/feature/product_detail/controller/product_detail_bloc.dart';
 import 'package:neostore/feature/product_detail/controller/product_detail_state.dart';
 import 'package:neostore/feature/product_detail/widgets/product_detail_card_widget.dart';
 import 'package:neostore/feature/product_listing/controller/product_listing_bloc.dart';
 import 'package:neostore/feature/shared/buttons/grey_background_dark_grey_text_elevated_button.dart';
 import 'package:neostore/feature/shared/buttons/red_background_white_text_elevated_button.dart';
+import 'package:neostore/feature/shared/textfield/base_text_form_field.dart';
 import 'package:neostore/utils/colors.dart';
 import 'package:neostore/utils/constants.dart';
+import 'package:neostore/utils/extensions/phone_validator.dart';
 
 class ProductDetailPage extends StatelessWidget {
-  const ProductDetailPage({Key? key}) : super(key: key);
-
+  ProductDetailPage({Key? key}) : super(key: key);
+  final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -160,7 +163,21 @@ class ProductDetailPage extends StatelessWidget {
                       children: [
                         Flexible(
                           child: RedBackgroundWhiteTextElevatedButton(
-                              text: "BUY NOW", onPressed: () {}),
+                              text: "BUY NOW",
+                              onPressed: () {
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      content: SingleChildScrollView(
+                                        reverse: true,
+                                        child: _buildAlertItems(product,
+                                            _buildBuyNowSpecificWidget()),
+                                      ),
+                                    );
+                                  },
+                                );
+                              }),
                         ),
                         SizedBox(
                           width: 20.w,
@@ -168,7 +185,17 @@ class ProductDetailPage extends StatelessWidget {
                         Flexible(
                             child: GreyBackgroundDarkGreyTextElevatedButton(
                           text: "RATE",
-                          onPressed: () {},
+                          onPressed: () {
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  content: _buildAlertItems(
+                                      product, _rateNowSpecificWidget(product)),
+                                );
+                              },
+                            );
+                          },
                         ))
                       ],
                     ),
@@ -189,6 +216,149 @@ class ProductDetailPage extends StatelessWidget {
               fontSize: 20),
         ));
       }),
+    );
+  }
+
+  Widget _rateNowSpecificWidget(ProductDetailEntity product) {
+    int _selectedRate = 3;
+
+    return StatefulBuilder(
+      builder: (BuildContext context, StateSetter setState) {
+        return Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  for (int rate = 1; rate <= 5; rate++)
+                    IconButton(
+                      onPressed: () {
+                        setState(() {
+                          _selectedRate = rate;
+                        });
+                      },
+                      icon: Icon(
+                        Icons.star,
+                        size: 40,
+                        color: rate <= _selectedRate
+                            ? kStarGlowingColor
+                            : kStarDimColor,
+                      ),
+                    )
+                ],
+              ),
+              SizedBox(
+                height: 36.h,
+              ),
+              SizedBox(
+                  height: 250.h,
+                  width: 700.w,
+                  child: RedBackgroundWhiteTextElevatedButton(
+                      text: "RATE NOW", onPressed: () {}))
+            ]);
+      },
+    );
+  }
+
+  Widget _buildBuyNowSpecificWidget() {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        Text(
+          "Enter Qty",
+          style: TextStyle(
+              color: k2c2b2bColor,
+              fontWeight: FontWeight.w100,
+              fontSize: 20,
+              fontFamily: "Gotham"),
+        ),
+        SizedBox(
+          height: 40.h,
+        ),
+        Container(
+          width: 350.w,
+          height: 180.h,
+          decoration: BoxDecoration(
+            border: Border.all(
+              color: Colors.green,
+              width: 2,
+            ),
+          ),
+          child: Material(
+              child: Form(
+            key: _formKey,
+            child: BaseTextFormField(
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return "Value Cannot be Empty";
+                }
+                if (!value.isDigit()) {
+                  return "Invalid Quantity";
+                }
+              },
+            ),
+          )),
+        ),
+        SizedBox(
+          height: 25.h,
+        ),
+        SizedBox(
+          height: 250.h,
+          width: 500.w,
+          child: RedBackgroundWhiteTextElevatedButton(
+            text: "SUBMIT",
+            onPressed: () {},
+          ),
+        )
+      ],
+    );
+  }
+
+  Widget _buildAlertItems(ProductDetailEntity product, Widget child) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        SizedBox(
+          height: 35.h,
+        ),
+        Text(
+          product.name,
+          overflow: TextOverflow.ellipsis,
+          style: TextStyle(
+              color: k2c2b2bColor,
+              fontSize: 25,
+              fontFamily: 'Gotham',
+              fontWeight: FontWeight.w100),
+        ),
+        SizedBox(
+          height: 35.h,
+        ),
+        Container(
+          decoration: BoxDecoration(
+            border: Border.all(
+              color: Colors.grey,
+              width: 4,
+            ),
+          ),
+          child: Image.network(
+            product.productImages[0].image,
+            height: 534.h,
+            width: 900.w,
+            fit: BoxFit.fill,
+          ),
+        ),
+        SizedBox(
+          height: 60.h,
+        ),
+        child,
+      ],
     );
   }
 }

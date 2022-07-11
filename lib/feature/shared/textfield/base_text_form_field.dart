@@ -4,18 +4,18 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class BaseTextFormField extends StatelessWidget {
   BaseTextFormField(
       {Key? key,
-      required this.icon,
+      this.icon,
       this.errorText,
       this.validator,
-      required this.hintText,
+      this.hintText,
       this.textInputType,
       this.controller,
       this.obscureText})
       : super(key: key);
   final String? errorText;
-  final IconData icon;
+  final IconData? icon;
   final Function(String? str)? validator;
-  final String hintText;
+  final String? hintText;
   bool? obscureText;
   TextEditingController? controller;
   TextInputType? textInputType;

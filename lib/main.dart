@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:neostore/feature/home/pages/home_screen.dart';
+import 'package:neostore/feature/my_order/pages/order_detail_page.dart';
+import 'package:neostore/feature/my_order/pages/order_list_page.dart';
 import 'package:neostore/feature/product_detail/controller/product_detail_bloc.dart';
 import 'package:neostore/feature/product_detail/pages/product_detail_page.dart';
 import 'package:neostore/feature/product_listing/controller/product_listing_bloc.dart';
@@ -40,7 +42,7 @@ class MyApp extends StatelessWidget {
               debugShowCheckedModeBanner: false,
               title: 'Flutter Demo',
               theme: buildThemeData(),
-              initialRoute: AppRouter.home,
+              initialRoute: AppRouter.my_orders,
               routes: {
                 AppRouter.login: (_) => const LoginScreen(),
                 AppRouter.register: (_) => const Register(),
@@ -48,7 +50,9 @@ class MyApp extends StatelessWidget {
                 AppRouter.home: (_) => const HomeScreen(),
                 AppRouter.reset_password: (_) => const ResetPasswordScreen(),
                 AppRouter.product_list: (_) => ProductListPage(),
-                AppRouter.product_detail: (_) => const ProductDetailPage(),
+                AppRouter.product_detail: (_) => ProductDetailPage(),
+                AppRouter.my_orders: (_) => const MyOrdersListPage(),
+                AppRouter.order_detail: (_) => const OrderDetailPage(),
               },
             );
           }),

@@ -6,4 +6,6 @@ class AppRouter {
   static const reset_password = "reset_password";
   static const product_list = "product_list";
   static const product_detail = "product_detail";
+  static const my_orders = "/my_orders";
+  static const order_detail = "/order_detail";
 }

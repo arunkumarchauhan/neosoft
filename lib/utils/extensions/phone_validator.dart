@@ -7,3 +7,13 @@ extension PhoneValidator on String {
     }
   }
 }
+
+extension CheckDigit on String {
+  bool isDigit() {
+    try {
+      return int.tryParse(this) != null;
+    } catch (e) {
+      return false;
+    }
+  }
+}
