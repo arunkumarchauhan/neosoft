@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:neostore/core/product/domain/di/product_list_injection.dart';
+import 'package:neostore/feature/cart/controller/cart_list_bloc.dart';
+import 'package:neostore/feature/cart/controller/cart_list_events.dart';
 import 'package:neostore/feature/home/widgets/carousel_slider_widget.dart';
 import 'package:neostore/feature/my_order/controller/order_list/order_list_bloc.dart';
 import 'package:neostore/feature/my_order/controller/order_list/order_list_event.dart';
@@ -282,6 +284,10 @@ class HomeScreen extends StatelessWidget {
             .read<ProductListingBloc>()
             .add(InitiateProductListFetchEvent(productCategoryId: 4));
         Navigator.pushNamed(context, AppRouter.product_list);
+        return;
+      case kMyCart:
+        context.read<CartListBloc>().add(FetchCartItemsEvent());
+        Navigator.pushNamed(context, AppRouter.my_cart);
         return;
       default:
         print("No Actions performed");

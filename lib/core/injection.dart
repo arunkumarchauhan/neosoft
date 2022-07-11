@@ -10,20 +10,21 @@ import './orders/domain/di/order_list_injection.dart' as orders_list_injection;
 
 import './orders/domain/di/order_detail_injection.dart'
     as order_detail_injection;
+import './cart/domain/di/cart_item_list_injection.dart' as cart_injection;
 
 final locator = GetIt.instance;
 void inject() {
-  var _dio = Dio(BaseOptions(contentType: "application/json"));
-  _dio
-    ..interceptors
-        .add(InterceptorsWrapper(onRequest: (RequestOptions options, _) {
-      print("Interceptor Request ${options.uri}");
-    }, onResponse: (Response response, _) {
-      print("Interceptor Response ${response.data}");
-    }, onError: (DioError error, _) {
-      print("Interceptor Error : ${error}");
-    }));
-  locator.registerLazySingleton(() => _dio);
+  // var _dio = Dio(BaseOptions(contentType: "application/json"));
+  // _dio
+  //   ..interceptors
+  //       .add(InterceptorsWrapper(onRequest: (RequestOptions options, _) {
+  //     print("Interceptor Request ${options.uri}");
+  //   }, onResponse: (Response response, _) {
+  //     print("Interceptor Response ${response.data}");
+  //   }, onError: (DioError error, _) {
+  //     print("Interceptor Error : ${error}");
+  //   }));
+  // locator.registerLazySingleton(() => _dio);
 
   locator.registerLazySingleton(() => ApiService());
 
@@ -31,4 +32,5 @@ void inject() {
   product_detail_injection.inject();
   orders_list_injection.inject();
   order_detail_injection.inject();
+  cart_injection.inject();
 }

@@ -44,8 +44,6 @@ class OrderRepositoryImplementation extends OrderRepository {
       } else {
         return Left(Failure("${response.status} : ${response.userMsg}"));
       }
-    } on SocketException {
-      return Left(Failure("No Internet"));
     } on DioError catch (e) {
       if (e.type == DioErrorType.connectTimeout) {
         return Left(Failure("Connection Timeout"));

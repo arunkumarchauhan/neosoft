@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:neostore/feature/cart/controller/cart_list_bloc.dart';
+import 'package:neostore/feature/cart/pages/my_cart_page.dart';
 import 'package:neostore/feature/home/pages/home_screen.dart';
 import 'package:neostore/feature/my_order/controller/order_detail/order_detail_bloc.dart';
 import 'package:neostore/feature/my_order/controller/order_list/order_list_bloc.dart';
@@ -42,6 +44,9 @@ class MyApp extends StatelessWidget {
         BlocProvider<OrderDetailBloc>(
           create: (BuildContext context) => di.locator<OrderDetailBloc>(),
         ),
+        BlocProvider<CartListBloc>(
+          create: (BuildContext context) => di.locator<CartListBloc>(),
+        ),
       ],
       child: ScreenUtilInit(
           designSize: const Size(1080, 1920),
@@ -61,6 +66,7 @@ class MyApp extends StatelessWidget {
                 AppRouter.product_detail: (_) => ProductDetailPage(),
                 AppRouter.my_orders: (_) => const MyOrdersListPage(),
                 AppRouter.order_detail: (_) => const OrderDetailPage(),
+                AppRouter.my_cart: (_) => MyCartPage(),
               },
             );
           }),

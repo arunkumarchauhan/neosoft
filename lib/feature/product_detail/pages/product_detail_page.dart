@@ -6,6 +6,7 @@ import 'package:neostore/feature/product_detail/controller/product_detail_bloc.d
 import 'package:neostore/feature/product_detail/controller/product_detail_state.dart';
 import 'package:neostore/feature/product_detail/widgets/product_detail_card_widget.dart';
 import 'package:neostore/feature/product_listing/controller/product_listing_bloc.dart';
+import 'package:neostore/feature/shared/appbar/build_appbar_with_title_back_and_search_button.dart';
 import 'package:neostore/feature/shared/buttons/grey_background_dark_grey_text_elevated_button.dart';
 import 'package:neostore/feature/shared/buttons/red_background_white_text_elevated_button.dart';
 import 'package:neostore/feature/shared/textfield/base_text_form_field.dart';
@@ -30,31 +31,9 @@ class ProductDetailPage extends StatelessWidget {
           final product = state.product;
           return Scaffold(
             backgroundColor: kLightGreyColor,
-            appBar: AppBar(
-              title: Text(
-                product.name,
-                overflow: TextOverflow.ellipsis,
-                style: Theme.of(context).textTheme.headline2,
-              ),
-              centerTitle: true,
-              actions: [
-                IconButton(
-                  onPressed: () {},
-                  icon: const Icon(
-                    Icons.search,
-                    size: 30,
-                  ),
-                )
-              ],
-              leading: GestureDetector(
-                onTap: () {
-                  Navigator.pop(context);
-                },
-                child: const Icon(
-                  Icons.arrow_back_ios,
-                  size: 25,
-                ),
-              ),
+            appBar: buildAppbarWithTitleBackAndSearchButton(
+              context: context,
+              title: product.name,
             ),
             body: SingleChildScrollView(
               child: Column(

@@ -8,4 +8,5 @@ class AppRouter {
   static const product_detail = "product_detail";
   static const my_orders = "/my_orders";
   static const order_detail = "/order_detail";
+  static const my_cart = "my_cart";
 }
