@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:neostore/feature/address/pages/add_address_screen.dart';
+import 'package:neostore/feature/address/pages/address_list_page.dart';
 import 'package:neostore/feature/cart/controller/cart_list_bloc.dart';
 import 'package:neostore/feature/cart/pages/my_cart_page.dart';
 import 'package:neostore/feature/home/pages/home_screen.dart';
@@ -55,7 +57,7 @@ class MyApp extends StatelessWidget {
               debugShowCheckedModeBanner: false,
               title: 'Flutter Demo',
               theme: buildThemeData(),
-              initialRoute: AppRouter.home,
+              initialRoute: AppRouter.list_address,
               routes: {
                 AppRouter.login: (_) => const LoginScreen(),
                 AppRouter.register: (_) => const Register(),
@@ -67,6 +69,8 @@ class MyApp extends StatelessWidget {
                 AppRouter.my_orders: (_) => const MyOrdersListPage(),
                 AppRouter.order_detail: (_) => const OrderDetailPage(),
                 AppRouter.my_cart: (_) => MyCartPage(),
+                AppRouter.add_address: (_) => AddAddressScreen(),
+                AppRouter.list_address: (_) => AddressListScreen(),
               },
             );
           }),

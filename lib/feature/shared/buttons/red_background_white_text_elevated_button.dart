@@ -30,7 +30,7 @@ class RedBackgroundWhiteTextElevatedButton extends StatelessWidget {
             style: ButtonStyle(
               backgroundColor: MaterialStateProperty.all<Color>(kMainRedColor),
               side: MaterialStateProperty.all<BorderSide>(
-                const BorderSide(color: Colors.black, width: 1),
+                const BorderSide(color: Colors.redAccent, width: 1),
               ),
             ),
           ),
