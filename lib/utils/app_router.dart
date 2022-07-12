@@ -11,4 +11,5 @@ class AppRouter {
   static const my_cart = "/my_cart";
   static const add_address = "/add_address";
   static const list_address = "/list_address";
+  static const my_account = "/my_account";
 }

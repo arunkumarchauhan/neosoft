@@ -15,6 +15,7 @@ import 'package:neostore/feature/product_listing/controller/product_listing_bloc
 import 'package:neostore/feature/product_listing/pages/product_list_screen.dart';
 import 'package:neostore/feature/user/page/forgot_password_screen.dart';
 import 'package:neostore/feature/user/page/login_screen.dart';
+import 'package:neostore/feature/user/page/my_account_screen.dart';
 import 'package:neostore/feature/user/page/register_screen.dart';
 import 'package:neostore/feature/user/page/reset_password.dart';
 import './core/injection.dart' as di;
@@ -57,7 +58,7 @@ class MyApp extends StatelessWidget {
               debugShowCheckedModeBanner: false,
               title: 'Flutter Demo',
               theme: buildThemeData(),
-              initialRoute: AppRouter.list_address,
+              initialRoute: AppRouter.my_account,
               routes: {
                 AppRouter.login: (_) => const LoginScreen(),
                 AppRouter.register: (_) => const Register(),
@@ -71,6 +72,7 @@ class MyApp extends StatelessWidget {
                 AppRouter.my_cart: (_) => MyCartPage(),
                 AppRouter.add_address: (_) => AddAddressScreen(),
                 AppRouter.list_address: (_) => AddressListScreen(),
+                AppRouter.my_account: (_) => MyAccount(),
               },
             );
           }),
