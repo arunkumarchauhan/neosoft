@@ -15,6 +15,7 @@ import './user/domain/di/login_injection.dart' as login_injection;
 import './user/domain/di/register_injection.dart' as register_injection;
 import './user/domain/di/forget_password_injection.dart'
     as forget_pass_injection;
+import './user/domain/di/reset_password_injection.dart' as reset_pass_injection;
 
 final locator = GetIt.instance;
 void inject() {
@@ -39,4 +40,5 @@ void inject() {
   cart_injection.inject();
   register_injection.inject();
   forget_pass_injection.inject();
+  reset_pass_injection.inject();
 }
