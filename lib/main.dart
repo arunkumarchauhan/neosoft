@@ -13,6 +13,7 @@ import 'package:neostore/feature/product_detail/controller/product_detail_bloc.d
 import 'package:neostore/feature/product_detail/pages/product_detail_page.dart';
 import 'package:neostore/feature/product_listing/controller/product_listing_bloc.dart';
 import 'package:neostore/feature/product_listing/pages/product_list_screen.dart';
+import 'package:neostore/feature/user/controller/edit_profile/edit_profile_bloc.dart';
 import 'package:neostore/feature/user/controller/forgot_password/forgot_password_bloc.dart';
 import 'package:neostore/feature/user/controller/login_controller/login_bloc.dart';
 import 'package:neostore/feature/user/controller/reset_password/reset_password_bloc.dart';
@@ -51,6 +52,9 @@ class MyApp extends StatelessWidget {
         BlocProvider<ResetPasswordBloc>(
           create: (BuildContext context) => di.locator<ResetPasswordBloc>(),
         ),
+        BlocProvider<EditProfileBloc>(
+          create: (BuildContext context) => di.locator<EditProfileBloc>(),
+        ),
         BlocProvider<ProductListingBloc>(
           create: (BuildContext context) => di.locator<ProductListingBloc>(),
         ),
@@ -74,7 +78,7 @@ class MyApp extends StatelessWidget {
               debugShowCheckedModeBanner: false,
               title: 'Flutter Demo',
               theme: buildThemeData(),
-              initialRoute: AppRouter.reset_password,
+              initialRoute: AppRouter.my_account,
               routes: {
                 AppRouter.login: (_) => LoginScreen(),
                 AppRouter.register: (_) => Register(),

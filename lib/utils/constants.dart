@@ -79,3 +79,5 @@ const kMyChairs = "Chairs";
 const kCupboards = "Cupboards";
 const kStoreLocators = "Store Locator";
 const kLogOut = "Logout";
+
+const kDob = "DOB";

@@ -1,43 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:neostore/core/user/domain/entity/edit_profile_body_entity.dart';
 import 'package:neostore/feature/shared/appbar/build_appbar_with_title_back_and_search_button.dart';
 import 'package:neostore/feature/shared/buttons/white_background_red_text_elevated_button.dart';
 import 'package:neostore/feature/shared/textfield/base_text_form_field.dart';
+import 'package:neostore/feature/user/controller/edit_profile/edit_profile_bloc.dart';
+import 'package:neostore/feature/user/controller/edit_profile/edit_profile_event.dart';
+import 'package:neostore/feature/user/controller/edit_profile/edit_profile_states.dart';
 import 'package:neostore/utils/app_router.dart';
-
 import 'package:neostore/utils/constants.dart';
+
 import 'package:neostore/utils/date_formatter.dart';
 import 'package:neostore/utils/extensions/email_validator.dart';
 import 'package:neostore/utils/extensions/phone_validator.dart';
 
-class MyAccount extends StatefulWidget {
-  const MyAccount({Key? key}) : super(key: key);
+class MyAccount extends StatelessWidget {
+  MyAccount({Key? key}) : super(key: key);
 
-  @override
-  State<MyAccount> createState() => _MyAccountState();
-}
+  final TextEditingController _firstNameController = TextEditingController();
+  final TextEditingController _lastNameController = TextEditingController();
 
-class _MyAccountState extends State<MyAccount> {
-  final _editAccountFormKey = GlobalKey<FormState>();
+  final TextEditingController _emailController = TextEditingController();
 
-  late final TextEditingController _firstNameController;
-  late final TextEditingController _lastNameController;
-
-  late final TextEditingController _emailController;
-  late final TextEditingController _passwordController;
-
-  late final TextEditingController _phoneController;
+  final TextEditingController _phoneController = TextEditingController();
   bool isEditing = false;
-  String _dob = "DOB";
-  @override
-  void initState() {
-    super.initState();
-    _firstNameController = TextEditingController();
-    _lastNameController = TextEditingController();
-    _emailController = TextEditingController();
-    _passwordController = TextEditingController();
-    _phoneController = TextEditingController();
-  }
+  String _dob = kDob;
 
   @override
   Widget build(BuildContext context) {
@@ -47,57 +35,57 @@ class _MyAccountState extends State<MyAccount> {
           context: context, title: isEditing ? "EDIT PROFILE" : "My Account"),
       body: SingleChildScrollView(
         child: Center(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Container(
-                margin: EdgeInsets.symmetric(horizontal: 40.w),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      height: 230.h,
-                    ),
-                    const Center(
-                        child: CircleAvatar(
-                      radius: 100,
-                      backgroundImage: AssetImage(
-                        "assets/images/profile.jpeg",
+          child: BlocBuilder<EditProfileBloc, EditProfileState>(
+              builder: (BuildContext context, EditProfileState state) {
+            EditProfileBodyEntity errorBody = EditProfileBodyEntity();
+            if (isEditing && state is InvalidInputEditProfileState) {
+              errorBody = state.errorBody;
+            }
+            if (state is EditButtonClickedEditProfileState) {
+              isEditing = true;
+            }
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                  margin: EdgeInsets.symmetric(horizontal: 40.w),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        height: 230.h,
                       ),
-                    )),
-                    SizedBox(
-                      height: 150.h,
-                    ),
-                    Form(
-                      key: _editAccountFormKey,
-                      child: Column(
+                      const Center(
+                          child: CircleAvatar(
+                        radius: 100,
+                        backgroundImage: AssetImage(
+                          "assets/images/profile.jpeg",
+                        ),
+                      )),
+                      SizedBox(
+                        height: 150.h,
+                      ),
+                      Column(
                         children: [
                           BaseTextFormField(
-                            enabled: false,
+                            enabled: isEditing,
                             controller: _firstNameController,
                             icon: Icons.person,
                             hintText: "First Name",
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return "This Field Cannot be empty";
-                              }
-                              return null;
-                            },
+                            errorText: errorBody.firstName,
+                            onChanged: (value) => _handleFormChange(context),
                           ),
                           const SizedBox(
                             height: 20,
                           ),
                           BaseTextFormField(
+                            enabled: isEditing,
                             controller: _lastNameController,
                             icon: Icons.person,
                             hintText: "Last Name",
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return "This Field Cannot be empty";
-                              }
-                              return null;
-                            },
+                            errorText: errorBody.lastName,
+                            onChanged: (value) => _handleFormChange(context),
                           ),
                           const SizedBox(
                             height: 20,
@@ -105,50 +93,39 @@ class _MyAccountState extends State<MyAccount> {
                           BaseTextFormField(
                             controller: _emailController,
                             icon: Icons.mail,
+                            enabled: isEditing,
+                            errorText: errorBody.email,
                             hintText: "Email",
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return "This Field Cannot be empty";
-                              }
-                              if (!value.isValidEmail()) {
-                                return "Invalid Email";
-                              }
-                              return null;
-                            },
+                            onChanged: (value) => _handleFormChange(context),
                           ),
                           const SizedBox(
                             height: 20,
                           ),
                           BaseTextFormField(
-                            controller: _passwordController,
+                            enabled: isEditing,
+                            controller: _phoneController,
                             icon: Icons.phone_android,
                             hintText: "Phone Number",
                             textInputType: TextInputType.number,
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return "This Field Cannot be empty";
-                              }
-                              if (!value.isValidPhone()) {
-                                return "Invalid Phone Number";
-                              }
-                              return null;
-                            },
+                            errorText: errorBody.phoneNo,
+                            onChanged: (value) => _handleFormChange(context),
                           ),
                           const SizedBox(
                             height: 20,
                           ),
                           GestureDetector(
                             onTap: () async {
-                              final _selectedDOB = await showDatePicker(
-                                  context: context,
-                                  initialDate: DateTime.now(),
-                                  firstDate: DateTime(1950),
-                                  lastDate: DateTime.now());
+                              if (isEditing) {
+                                final _selectedDOB = await showDatePicker(
+                                    context: context,
+                                    initialDate: DateTime.now(),
+                                    firstDate: DateTime(1950),
+                                    lastDate: DateTime.now());
 
-                              if (_selectedDOB != null) {
-                                setState(() {
+                                if (_selectedDOB != null) {
                                   _dob = formatDate(_selectedDOB);
-                                });
+                                }
+                                _handleFormChange(context);
                               }
                             },
                             child: Container(
@@ -197,20 +174,30 @@ class _MyAccountState extends State<MyAccount> {
                                 _phoneController.clear();
                                 isEditing = !isEditing;
                                 _dob = "DOB";
-                                setState(() {});
-                                if (!_editAccountFormKey.currentState!
-                                    .validate()) {
-                                  return;
-                                }
+                                context.read<EditProfileBloc>().add(
+                                      EditButtonClickedEditProfileEvent(
+                                          isEditing: isEditing),
+                                    );
                               },
                               text: "EDIT PROFILE",
                             ),
                           if (isEditing)
                             WhiteBackgroundRedTextElevatedButton(
                               onPressed: () {
-                                setState(() {});
-                                if (!_editAccountFormKey.currentState!
-                                    .validate()) {
+                                if (state is InvalidInputEditProfileState ||
+                                    state is InitializeEditProfileState) {
+                                  String message =
+                                      "Please fill form details correctly";
+                                  if (_dob == "DOB" &&
+                                      state is InvalidInputEditProfileState) {
+                                    message = "Please Select DOB";
+                                  }
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text(message),
+                                    ),
+                                  );
+
                                   return;
                                 }
                               },
@@ -218,23 +205,38 @@ class _MyAccountState extends State<MyAccount> {
                             ),
                         ],
                       ),
-                    ),
-                    const SizedBox(
-                      height: 30,
-                    ),
-                  ],
+                      const SizedBox(
+                        height: 30,
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              if (!isEditing)
-                WhiteBackgroundRedTextElevatedButton(
-                  text: "RESET PASSWORD",
-                  onPressed: () {
-                    Navigator.pushNamed(context, AppRouter.reset_password);
-                  },
-                  marginEdgeInsects: const EdgeInsets.symmetric(horizontal: 0),
-                )
-            ],
-          ),
+                if (!isEditing)
+                  WhiteBackgroundRedTextElevatedButton(
+                    text: "RESET PASSWORD",
+                    onPressed: () {
+                      Navigator.pushNamed(context, AppRouter.reset_password);
+                    },
+                    marginEdgeInsects:
+                        const EdgeInsets.symmetric(horizontal: 0),
+                  )
+              ],
+            );
+          }),
+        ),
+      ),
+    );
+  }
+
+  void _handleFormChange(BuildContext context) {
+    BlocProvider.of<EditProfileBloc>(context).add(
+      InputChangeEditProfileEvent(
+        body: EditProfileBodyEntity(
+          phoneNo: _phoneController.text,
+          email: _emailController.text,
+          lastName: _lastNameController.text,
+          firstName: _firstNameController.text,
+          dob: _dob,
         ),
       ),
     );
