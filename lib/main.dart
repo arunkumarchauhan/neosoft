@@ -13,6 +13,7 @@ import 'package:neostore/feature/product_detail/controller/product_detail_bloc.d
 import 'package:neostore/feature/product_detail/pages/product_detail_page.dart';
 import 'package:neostore/feature/product_listing/controller/product_listing_bloc.dart';
 import 'package:neostore/feature/product_listing/pages/product_list_screen.dart';
+import 'package:neostore/feature/user/controller/forgot_password/forgot_password_bloc.dart';
 import 'package:neostore/feature/user/controller/login_controller/login_bloc.dart';
 import 'package:neostore/feature/user/controller/user_register_controller/user_register_bloc.dart';
 import 'package:neostore/feature/user/page/forgot_password_screen.dart';
@@ -43,6 +44,9 @@ class MyApp extends StatelessWidget {
         BlocProvider<UserRegistrationBloc>(
           create: (BuildContext context) => di.locator<UserRegistrationBloc>(),
         ),
+        BlocProvider<ForgotPasswordBloc>(
+          create: (BuildContext context) => di.locator<ForgotPasswordBloc>(),
+        ),
         BlocProvider<ProductListingBloc>(
           create: (BuildContext context) => di.locator<ProductListingBloc>(),
         ),
@@ -66,11 +70,11 @@ class MyApp extends StatelessWidget {
               debugShowCheckedModeBanner: false,
               title: 'Flutter Demo',
               theme: buildThemeData(),
-              initialRoute: AppRouter.login,
+              initialRoute: AppRouter.forgot_password,
               routes: {
                 AppRouter.login: (_) => LoginScreen(),
                 AppRouter.register: (_) => Register(),
-                AppRouter.forgot_password: (_) => const ForgotPasswordScreen(),
+                AppRouter.forgot_password: (_) => ForgotPasswordScreen(),
                 AppRouter.home: (_) => const HomeScreen(),
                 AppRouter.reset_password: (_) => const ResetPasswordScreen(),
                 AppRouter.product_list: (_) => ProductListPage(),

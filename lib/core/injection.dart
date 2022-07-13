@@ -13,6 +13,8 @@ import './orders/domain/di/order_detail_injection.dart'
 import './cart/domain/di/cart_item_list_injection.dart' as cart_injection;
 import './user/domain/di/login_injection.dart' as login_injection;
 import './user/domain/di/register_injection.dart' as register_injection;
+import './user/domain/di/forget_password_injection.dart'
+    as forget_pass_injection;
 
 final locator = GetIt.instance;
 void inject() {
@@ -36,4 +38,5 @@ void inject() {
   order_detail_injection.inject();
   cart_injection.inject();
   register_injection.inject();
+  forget_pass_injection.inject();
 }

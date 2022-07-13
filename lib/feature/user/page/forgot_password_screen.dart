@@ -1,19 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:neostore/feature/shared/buttons/white_background_red_text_elevated_button.dart';
 import 'package:neostore/feature/shared/textfield/base_text_form_field.dart';
-import 'package:neostore/utils/extensions/email_validator.dart';
+import 'package:neostore/feature/user/controller/forgot_password/forgot_password_bloc.dart';
+import 'package:neostore/feature/user/controller/forgot_password/forgot_password_event.dart';
+import 'package:neostore/feature/user/controller/forgot_password/forgot_password_state.dart';
 
-class ForgotPasswordScreen extends StatefulWidget {
-  const ForgotPasswordScreen({Key? key}) : super(key: key);
+class ForgotPasswordScreen extends StatelessWidget {
+  ForgotPasswordScreen({Key? key}) : super(key: key);
 
-  @override
-  State<ForgotPasswordScreen> createState() => _ForgotPasswordScreenState();
-}
-
-class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
-  final _forgotPasswordFormKey = GlobalKey<FormState>();
-
+  final TextEditingController _emailController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,19 +51,22 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                     SizedBox(
                       height: 150.h,
                     ),
-                    Form(
-                      key: _forgotPasswordFormKey,
-                      child: Column(
+                    BlocBuilder<ForgotPasswordBloc, ForgotPasswordState>(
+                        builder:
+                            (BuildContext context, ForgotPasswordState state) {
+                      String? error;
+                      if (state is InvalidInputForgotPasswordState) {
+                        error = state.error;
+                      }
+                      return Column(
                         children: [
                           BaseTextFormField(
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return "Email cannot be empty.";
-                              }
-                              if (!value.isValidEmail()) {
-                                return "Please enter valid Email.";
-                              }
-                              return null;
+                            controller: _emailController,
+                            errorText: error,
+                            onChanged: (value) {
+                              BlocProvider.of<ForgotPasswordBloc>(context).add(
+                                  InputChangeForgotPasswordEvent(
+                                      email: _emailController.text));
                             },
                             icon: Icons.email,
                             hintText: "Email",
@@ -76,16 +76,18 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                           ),
                           WhiteBackgroundRedTextElevatedButton(
                             onPressed: () {
-                              if (!_forgotPasswordFormKey.currentState!
-                                  .validate()) {
+                              if (state is InvalidInputForgotPasswordState) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                        content: Text("Invalid Email ")));
                                 return;
                               }
                             },
                             text: "SEND PASSWORD",
                           ),
                         ],
-                      ),
-                    ),
+                      );
+                    }),
                   ],
                 ),
               ],
