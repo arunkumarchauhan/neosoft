@@ -1,3 +1,5 @@
+import 'package:neostore/core/user/domain/entity/user_login_cred_entity.dart';
+
 abstract class LoginEvent {}
 
 class InitiateLoginEvent extends LoginEvent {
@@ -13,4 +15,9 @@ class SuccessLoginEvent extends LoginEvent {
 class InvalidCredentialsLoginEvent extends LoginEvent {
   @override
   String toString() => "InvalidCredentialsLoginEvent";
+}
+
+class LoginInputChangeEvent extends LoginEvent {
+  UserLoginCredEntity userLoginCred;
+  LoginInputChangeEvent({required this.userLoginCred});
 }

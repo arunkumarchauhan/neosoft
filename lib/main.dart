@@ -13,6 +13,8 @@ import 'package:neostore/feature/product_detail/controller/product_detail_bloc.d
 import 'package:neostore/feature/product_detail/pages/product_detail_page.dart';
 import 'package:neostore/feature/product_listing/controller/product_listing_bloc.dart';
 import 'package:neostore/feature/product_listing/pages/product_list_screen.dart';
+import 'package:neostore/feature/user/controller/login_controller/login_bloc.dart';
+import 'package:neostore/feature/user/controller/user_register_controller/user_register_bloc.dart';
 import 'package:neostore/feature/user/page/forgot_password_screen.dart';
 import 'package:neostore/feature/user/page/login_screen.dart';
 import 'package:neostore/feature/user/page/my_account_screen.dart';
@@ -35,6 +37,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        BlocProvider<LoginBloc>(
+          create: (BuildContext context) => di.locator<LoginBloc>(),
+        ),
+        BlocProvider<UserRegistrationBloc>(
+          create: (BuildContext context) => di.locator<UserRegistrationBloc>(),
+        ),
         BlocProvider<ProductListingBloc>(
           create: (BuildContext context) => di.locator<ProductListingBloc>(),
         ),
@@ -58,10 +66,10 @@ class MyApp extends StatelessWidget {
               debugShowCheckedModeBanner: false,
               title: 'Flutter Demo',
               theme: buildThemeData(),
-              initialRoute: AppRouter.my_account,
+              initialRoute: AppRouter.login,
               routes: {
-                AppRouter.login: (_) => const LoginScreen(),
-                AppRouter.register: (_) => const Register(),
+                AppRouter.login: (_) => LoginScreen(),
+                AppRouter.register: (_) => Register(),
                 AppRouter.forgot_password: (_) => const ForgotPasswordScreen(),
                 AppRouter.home: (_) => const HomeScreen(),
                 AppRouter.reset_password: (_) => const ResetPasswordScreen(),

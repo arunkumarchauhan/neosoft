@@ -1,19 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:neostore/core/user/domain/entity/user_login_cred_entity.dart';
 import 'package:neostore/feature/shared/buttons/white_background_red_text_elevated_button.dart';
 import 'package:neostore/feature/shared/buttons/white_text_button.dart';
 import 'package:neostore/feature/shared/textfield/base_text_form_field.dart';
+import 'package:neostore/feature/user/controller/login_controller/login_bloc.dart';
+import 'package:neostore/feature/user/controller/login_controller/login_event.dart';
+import 'package:neostore/feature/user/controller/login_controller/login_state.dart';
 import 'package:neostore/utils/app_router.dart';
+import 'package:neostore/utils/models/user_login_cred_error_model.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+class LoginScreen extends StatelessWidget {
+  LoginScreen({Key? key}) : super(key: key);
 
-  @override
-  State<LoginScreen> createState() => _LoginScreenState();
-}
-
-class _LoginScreenState extends State<LoginScreen> {
-  final _loginFormKey = GlobalKey<FormState>();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -42,36 +44,43 @@ class _LoginScreenState extends State<LoginScreen> {
                   SizedBox(
                     height: 150.h,
                   ),
-                  Form(
-                    key: _loginFormKey,
-                    child: Column(
+                  BlocBuilder<LoginBloc, LoginState>(
+                      builder: (BuildContext context, LoginState state) {
+                    UserLoginCredError userLoginCredError =
+                        UserLoginCredError();
+                    if (state is InvalidLoginInputState) {
+                      userLoginCredError = state.userLoginCredError;
+                    }
+
+                    return Column(
                       children: [
                         BaseTextFormField(
+                          controller: _emailController,
                           icon: Icons.person,
-                          hintText: "Username",
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return "Please Enter Valid Username";
-                            }
-                            return null;
-                          },
+                          textInputType: TextInputType.text,
+                          hintText: "Email",
+                          onChanged: (value) => _handleInputChange(context),
+                          errorText: userLoginCredError.userNameError,
                         ),
                         SizedBox(
                           height: 20.h,
                         ),
                         BaseTextFormField(
+                          obscureText: true,
+                          controller: _passwordController,
                           icon: Icons.lock,
                           hintText: "Password",
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return "Please Enter The Password";
-                            }
-                            return null;
-                          },
+                          onChanged: (value) => _handleInputChange(context),
+                          errorText: userLoginCredError.userPasswordError,
                         ),
                         WhiteBackgroundRedTextElevatedButton(
                           onPressed: () {
-                            if (!_loginFormKey.currentState!.validate()) {
+                            if (state is LoginInitialState ||
+                                state is InvalidLoginInputState) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                      content: Text(
+                                          "Please Correct Invalid Inputs")));
                               return;
                             }
                             //Perform Operation
@@ -85,12 +94,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                 context, AppRouter.forgot_password);
                           },
                         ),
-                        // SizedBox(
-                        //   height: 100.h,
-                        // ),
                       ],
-                    ),
-                  ),
+                    );
+                  }),
                 ],
               ),
               Padding(
@@ -127,5 +133,11 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       ),
     );
+  }
+
+  void _handleInputChange(BuildContext context) {
+    BlocProvider.of<LoginBloc>(context).add(LoginInputChangeEvent(
+        userLoginCred: UserLoginCredEntity(
+            email: _emailController.text, password: _passwordController.text)));
   }
 }

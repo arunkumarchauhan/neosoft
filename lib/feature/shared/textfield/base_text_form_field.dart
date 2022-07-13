@@ -13,6 +13,7 @@ class BaseTextFormField extends StatelessWidget {
     this.obscureText,
     this.textColor,
     this.enabled = true,
+    this.onChanged,
   }) : super(key: key);
   final String? errorText;
   final IconData? icon;
@@ -23,6 +24,7 @@ class BaseTextFormField extends StatelessWidget {
   TextInputType? textInputType;
   Color? textColor;
   bool enabled;
+  Function(String? value)? onChanged;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -30,6 +32,7 @@ class BaseTextFormField extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 40.w),
       child: TextFormField(
         enabled: enabled,
+        onChanged: onChanged == null ? null : (value) => onChanged!(value),
         style: TextStyle(
           color: textColor ?? Colors.white,
           fontSize: 20,
@@ -41,7 +44,7 @@ class BaseTextFormField extends StatelessWidget {
             ? (String? str) {}
             : (String? str) => validator!(str),
         controller: controller,
-        keyboardType: textInputType,
+        keyboardType: textInputType ?? TextInputType.text,
         decoration: InputDecoration(
           errorText: errorText,
           prefixIcon: Icon(

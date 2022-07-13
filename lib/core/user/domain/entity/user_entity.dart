@@ -6,23 +6,24 @@ import 'dart:convert';
 
 class UserEntity {
   UserEntity({
-    required this.firstName,
-    required this.lastName,
-    required this.email,
-    required this.password,
-    required this.confirmPassword,
-    required this.gender,
-    required this.phoneNo,
+    this.firstName,
+    this.lastName,
+    this.email,
+    this.password,
+    this.confirmPassword,
+    this.gender,
+    this.phoneNo,
+    this.acceptedTerms,
   });
 
-  String firstName;
-  String lastName;
-  String email;
-  String password;
-  String confirmPassword;
-  String gender;
-  int phoneNo;
-
+  String? firstName;
+  String? lastName;
+  String? email;
+  String? password;
+  String? confirmPassword;
+  String? gender;
+  String? phoneNo;
+  bool? acceptedTerms;
   factory UserEntity.fromJson(String str) =>
       UserEntity.fromMap(json.decode(str));
 
@@ -36,6 +37,7 @@ class UserEntity {
         confirmPassword: json["confirm_password"],
         gender: json["gender"],
         phoneNo: json["phone_no"],
+        acceptedTerms: json["accepted_terms"],
       );
 
   Map<String, dynamic> toMap() => {
@@ -45,6 +47,12 @@ class UserEntity {
         "password": password,
         "confirm_password": confirmPassword,
         "gender": gender,
-        "phone_no": phoneNo,
+        "phone_no": int.tryParse(phoneNo ?? "0"),
+        "accepted_terms": acceptedTerms ?? false
       };
+
+  @override
+  String toString() {
+    return 'UserEntity{ firstName: $firstName, lastName: $lastName, email: $email, password: $password, confirmPassword: $confirmPassword, gender: $gender, phoneNo: $phoneNo, acceptedTerms: $acceptedTerms}';
+  }
 }
