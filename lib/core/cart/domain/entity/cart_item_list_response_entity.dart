@@ -12,6 +12,12 @@ class CartListItemResponseEntity {
 
   List<CartListItemMetaEntity>? productMetaEntity;
   int? count;
+
+  @override
+  String toString() {
+    return 'CartListItemResponseEntity{productMetaEntity: $productMetaEntity, count: $count, total: $total}';
+  }
+
   double? total;
 
   factory CartListItemResponseEntity.fromJson(String str) =>

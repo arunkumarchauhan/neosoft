@@ -59,3 +59,4 @@ final k4f4f4fColor = HexColor.fromHex("#4f4f4f");
 final k333333Color = HexColor.fromHex("#333333");
 final k6b6b6bColor = HexColor.fromHex("#6b6b6b");
 final k8e8e8eColor = HexColor.fromHex("#8e8e8e");
+final ke91c1aColor = HexColor.fromHex("#e91c1a");

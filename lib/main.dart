@@ -78,7 +78,7 @@ class MyApp extends StatelessWidget {
               debugShowCheckedModeBanner: false,
               title: 'Flutter Demo',
               theme: buildThemeData(),
-              initialRoute: AppRouter.my_account,
+              initialRoute: AppRouter.home,
               routes: {
                 AppRouter.login: (_) => LoginScreen(),
                 AppRouter.register: (_) => Register(),
@@ -91,7 +91,7 @@ class MyApp extends StatelessWidget {
                 AppRouter.order_detail: (_) => const OrderDetailPage(),
                 AppRouter.my_cart: (_) => MyCartPage(),
                 AppRouter.add_address: (_) => AddAddressScreen(),
-                AppRouter.list_address: (_) => AddressListScreen(),
+                AppRouter.list_address: (_) => const AddressListScreen(),
                 AppRouter.my_account: (_) => MyAccount(),
               },
             );

@@ -10,6 +10,12 @@ class CartListItemEntity {
   });
 
   String? name;
+
+  @override
+  String toString() {
+    return 'CartListItemEntity{name: $name, cost: $cost, productCategory: $productCategory, productImages: $productImages, subTotal: $subTotal}';
+  }
+
   double? cost;
   String? productCategory;
   String? productImages;

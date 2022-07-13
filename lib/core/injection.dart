@@ -1,4 +1,6 @@
 import 'package:dio/dio.dart';
+import 'package:logger/logger.dart';
+
 import 'package:get_it/get_it.dart';
 import 'package:neostore/services/api_service.dart';
 import './product/domain/di/product_list_injection.dart'
@@ -32,7 +34,7 @@ void inject() {
   //   }));
   // locator.registerLazySingleton(() => _dio);
   login_injection.inject();
-
+  locator.registerLazySingleton(() => Logger());
   locator.registerLazySingleton(() => ApiService());
   product_list_injection.inject();
   product_detail_injection.inject();

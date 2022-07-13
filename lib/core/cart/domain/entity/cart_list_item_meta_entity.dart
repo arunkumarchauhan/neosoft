@@ -9,6 +9,11 @@ class CartListItemMetaEntity {
     this.product,
   });
 
+  @override
+  String toString() {
+    return 'CartListItemMetaEntity{quantity: $quantity, product: $product}';
+  }
+
   int? quantity;
   CartListItemEntity? product;
 

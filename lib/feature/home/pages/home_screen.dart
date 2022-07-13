@@ -21,6 +21,9 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      onDrawerChanged: (isOpened) {
+        context.read<CartListBloc>().add(FetchCartItemsEvent());
+      },
       drawer: _buildDrawer(context),
       appBar: AppBar(
         title: Text(
@@ -286,7 +289,7 @@ class HomeScreen extends StatelessWidget {
         Navigator.pushNamed(context, AppRouter.product_list);
         return;
       case kMyCart:
-        context.read<CartListBloc>().add(FetchCartItemsEvent());
+        // context.read<CartListBloc>().add(FetchCartItemsEvent());
         Navigator.pushNamed(context, AppRouter.my_cart);
         return;
       default:
@@ -308,18 +311,24 @@ class HomeScreen extends StatelessWidget {
           style: Theme.of(context).textTheme.headline2,
         ),
         trailing: index == 0
-            ? Container(
-                height: 32,
-                width: 32,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: HexColor.fromHex("#e91c1a"),
-                ),
-                child: Text(
-                  "2",
-                  style: Theme.of(context).textTheme.headline2,
-                ))
+            ? Builder(builder: (context) {
+                final itemCount = context.watch<CartListBloc>().itemCount;
+                if (itemCount == 0) {
+                  return const SizedBox();
+                }
+                return Container(
+                    height: 32,
+                    width: 32,
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: itemCount == 0 ? null : ke91c1aColor,
+                    ),
+                    child: Text(
+                      "${context.read<CartListBloc>().itemCount}",
+                      style: Theme.of(context).textTheme.headline2,
+                    ));
+              })
             : null);
   }
 }

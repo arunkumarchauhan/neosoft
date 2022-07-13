@@ -5,6 +5,7 @@ import 'package:neostore/feature/cart/controller/cart_list_states.dart';
 
 class CartListBloc extends Bloc<CartListEvent, CartListState> {
   GetCartItemsUseCase _useCase;
+  int itemCount = 0;
   CartListBloc({required GetCartItemsUseCase cartItemsUseCase})
       : _useCase = cartItemsUseCase,
         super(CartListInitState()) {
@@ -17,6 +18,10 @@ class CartListBloc extends Bloc<CartListEvent, CartListState> {
         emit(CartListFetchFailedState(failure: left));
       }, (right) {
         print(right);
+        if (!(right.count == null) && right.count! > 0) {
+          itemCount = 2;
+        }
+
         emit(CartListFetchSuccessfulState(cart: right));
       });
     });
