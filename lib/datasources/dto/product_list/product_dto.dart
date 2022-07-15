@@ -1,0 +1,76 @@
+import 'dart:convert';
+
+import 'package:json_annotation/json_annotation.dart';
+
+@JsonSerializable()
+class ProductDTO {
+  ProductDTO({
+    this.id,
+    this.productCategoryId,
+    this.name,
+    this.producer,
+    this.description,
+    this.cost,
+    this.rating,
+    this.viewCount,
+    this.created,
+    this.modified,
+    this.productImages,
+  });
+
+  int? id;
+  @JsonKey(name: "product_category_id")
+  int? productCategoryId;
+  String? name;
+  String? producer;
+  String? description;
+  double? cost;
+  int? rating;
+  @JsonKey(name: "view_count")
+  int? viewCount;
+  String? created;
+  String? modified;
+
+  @JsonKey(name: "product_images")
+  String? productImages;
+
+  List<ProductDTO>? products;
+
+  factory ProductDTO.fromJson(json) => ProductDTO.fromMap(json);
+
+  factory ProductDTO.fromMap(Map<String, dynamic> json) =>
+      _$ProductDTOFromJson(json);
+  Map<String, dynamic> toJson() => _$ProductDTOToJson(this);
+}
+
+ProductDTO _$ProductDTOFromJson(Map<String, dynamic> json) => ProductDTO(
+      id: json['id'] as int?,
+      productCategoryId: json['product_category_id'] as int?,
+      name: json['name'] as String?,
+      producer: json['producer'] as String?,
+      description: json['description'] as String?,
+      cost: (json['cost'] as num?)?.toDouble(),
+      rating: json['rating'] as int?,
+      viewCount: json['view_count'] as int?,
+      created: json['created'] as String?,
+      modified: json['modified'] as String?,
+      productImages: json['product_images'] as String?,
+    )..products = (json['products'] as List<dynamic>?)
+        ?.map((e) => ProductDTO.fromJson(e))
+        .toList();
+
+Map<String, dynamic> _$ProductDTOToJson(ProductDTO instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'product_category_id': instance.productCategoryId,
+      'name': instance.name,
+      'producer': instance.producer,
+      'description': instance.description,
+      'cost': instance.cost,
+      'rating': instance.rating,
+      'view_count': instance.viewCount,
+      'created': instance.created,
+      'modified': instance.modified,
+      'product_images': instance.productImages,
+      'products': instance.products,
+    };

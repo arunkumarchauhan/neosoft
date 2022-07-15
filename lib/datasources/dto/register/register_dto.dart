@@ -1,0 +1,44 @@
+class RegisterDTO {
+  RegisterDTO({
+    this.firstName,
+    this.lastName,
+    this.email,
+    this.password,
+    this.confirmPassword,
+    this.gender,
+    this.phoneNo,
+  });
+
+  String? firstName;
+  String? lastName;
+  String? email;
+  String? password;
+  String? confirmPassword;
+  String? gender;
+  int? phoneNo;
+
+  factory RegisterDTO.fromJson(Map<String, dynamic> json) =>
+      _$RegisterDTOFromJson(json);
+  Map<String, dynamic> toJson() => _$RegisterDTOToJson(this);
+}
+
+RegisterDTO _$RegisterDTOFromJson(Map<String, dynamic> json) => RegisterDTO(
+      firstName: json['firstName'] as String?,
+      lastName: json['lastName'] as String?,
+      email: json['email'] as String?,
+      password: json['password'] as String?,
+      confirmPassword: json['confirmPassword'] as String?,
+      gender: json['gender'] as String?,
+      phoneNo: json['phoneNo'] as int?,
+    );
+
+Map<String, dynamic> _$RegisterDTOToJson(RegisterDTO instance) =>
+    <String, dynamic>{
+      'firstName': instance.firstName,
+      'lastName': instance.lastName,
+      'email': instance.email,
+      'password': instance.password,
+      'confirmPassword': instance.confirmPassword,
+      'gender': instance.gender,
+      'phoneNo': instance.phoneNo,
+    };
