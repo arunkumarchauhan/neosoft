@@ -16,14 +16,13 @@ class WhiteBackgroundRedTextElevatedButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      // width: double.infinity,
-      // height: 65,
+      height: 65,
       margin: marginEdgeInsects ??
-          EdgeInsets.only(
-            top: 50.h,
-            bottom: 40.h,
-            left: 40.h,
-            right: 40.h,
+          const EdgeInsets.only(
+            top: 16,
+            bottom: 16,
+            left: 15,
+            right: 15,
           ),
       child: ElevatedButton(
         style: ButtonStyle(

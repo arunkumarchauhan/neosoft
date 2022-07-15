@@ -1,5 +1,6 @@
 import 'package:either_dart/either.dart';
 import 'package:either_dart/src/either.dart';
+import 'package:flutter/material.dart';
 import 'package:neostore/datasources/remote/implementation/user_api_service.dart';
 import 'package:neostore/data/mapper/user_mapper.dart';
 import 'package:neostore/domain/repositories/user_repository.dart';
@@ -24,7 +25,7 @@ class UserRepoRetroImplementation implements UserRepository {
         return Left(Failure("${response.usr_msg}"));
       }
     } catch (e) {
-      print(e);
+      debugPrint(e.toString());
       return Left(Failure(e.toString()));
     }
   }
@@ -41,7 +42,7 @@ class UserRepoRetroImplementation implements UserRepository {
         return Left(Failure("${response.usr_msg}"));
       }
     } catch (e) {
-      print(e);
+      debugPrint(e.toString());
       return Left(Failure(e.toString()));
     }
   }

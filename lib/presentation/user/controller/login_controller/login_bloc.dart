@@ -17,12 +17,13 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     on<LoginInputChangeEvent>((event, emit) {
       emit(ValidatingLoginInputState());
       UserLoginCredError userLoginCredError = UserLoginCredError();
-
       if (!event.userLoginCred.email.isValidEmail()) {
         userLoginCredError.userNameError = "Invalid Email";
+        emit(InvalidLoginInputState(userLoginCredError: userLoginCredError));
       } else if (event.userLoginCred.password == null ||
           event.userLoginCred.password.isEmpty) {
         userLoginCredError.userPasswordError = "Invalid Password";
+        emit(InvalidLoginInputState(userLoginCredError: userLoginCredError));
       } else {
         emit(ValidLoginInputState(userLoginCredError: userLoginCredError));
       }

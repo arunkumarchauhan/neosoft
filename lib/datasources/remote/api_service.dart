@@ -14,7 +14,7 @@ class ApiService {
     String url = "$kBaseUrl$subUrl";
     final locator = GetIt.instance;
     // final logger = locator<Logger>();
-    // print("URL :  $url");
+    // debugPrint("URL :  $url");
     Response response = await _dio.get(url,
         queryParameters: params,
         options: Options(headers: {"access_token": "61827d01a6136"}));

@@ -63,8 +63,8 @@ class MyAccount extends StatelessWidget {
                           "assets/images/profile.jpeg",
                         ),
                       )),
-                      SizedBox(
-                        height: 150.h,
+                      const SizedBox(
+                        height: 55,
                       ),
                       Column(
                         children: [
@@ -77,7 +77,7 @@ class MyAccount extends StatelessWidget {
                             onChanged: (value) => _handleFormChange(context),
                           ),
                           const SizedBox(
-                            height: 20,
+                            height: 10,
                           ),
                           BaseTextFormField(
                             enabled: isEditing,
@@ -88,7 +88,7 @@ class MyAccount extends StatelessWidget {
                             onChanged: (value) => _handleFormChange(context),
                           ),
                           const SizedBox(
-                            height: 20,
+                            height: 10,
                           ),
                           BaseTextFormField(
                             controller: _emailController,
@@ -99,7 +99,7 @@ class MyAccount extends StatelessWidget {
                             onChanged: (value) => _handleFormChange(context),
                           ),
                           const SizedBox(
-                            height: 20,
+                            height: 10,
                           ),
                           BaseTextFormField(
                             enabled: isEditing,
@@ -111,7 +111,7 @@ class MyAccount extends StatelessWidget {
                             onChanged: (value) => _handleFormChange(context),
                           ),
                           const SizedBox(
-                            height: 20,
+                            height: 10,
                           ),
                           GestureDetector(
                             onTap: () async {
@@ -129,8 +129,8 @@ class MyAccount extends StatelessWidget {
                               }
                             },
                             child: Container(
-                              margin: EdgeInsets.symmetric(horizontal: 40.w),
-                              height: 180.h,
+                              margin: EdgeInsets.symmetric(horizontal: 15),
+                              height: 68,
                               padding: EdgeInsets.all(30.w),
                               decoration: BoxDecoration(
                                 borderRadius: const BorderRadius.all(

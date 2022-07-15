@@ -52,7 +52,7 @@ class AddAddressScreen extends StatelessWidget {
             ),
             Container(
               color: Colors.white,
-              height: 350.h,
+              height: 140,
               margin: const EdgeInsets.only(top: 20),
               child: BaseTextFormField(
                 controller: _textAddressController,
@@ -73,7 +73,7 @@ class AddAddressScreen extends StatelessWidget {
             ),
             Container(
               color: Colors.white,
-              height: 150.h,
+              height: 55,
               margin: const EdgeInsets.only(top: 20),
               child: BaseTextFormField(
                 controller: _textLandmarkController,
@@ -105,8 +105,11 @@ class AddAddressScreen extends StatelessWidget {
                     textEditingController: _textCountryController),
               ],
             ),
+            const SizedBox(
+              height: 30,
+            ),
             SizedBox(
-              height: 250.h,
+              height: 90,
               child: RedBackgroundWhiteTextElevatedButton(
                   text: "SAVE ADDRESS", onPressed: () {}),
             )
@@ -138,7 +141,7 @@ class AddAddressScreen extends StatelessWidget {
         ),
         Container(
           color: Colors.white,
-          height: 150.h,
+          height: 55,
           width: 450.w,
           child: BaseTextFormField(
             controller: textEditingController,

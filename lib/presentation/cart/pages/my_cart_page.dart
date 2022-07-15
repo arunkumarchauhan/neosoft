@@ -21,7 +21,7 @@ class MyCartPage extends StatelessWidget {
       ),
       body: BlocBuilder<CartListBloc, CartListState>(
           builder: (BuildContext context, CartListState state) {
-        print(state);
+        debugPrint(state.toString());
         if (state is CartListLoadingState) {
           return const Center(
             child: CircularProgressIndicator(),

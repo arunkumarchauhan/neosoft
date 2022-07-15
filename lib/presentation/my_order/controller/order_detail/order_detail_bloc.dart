@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:neostore/domain/usecases/order/get_order_detail_usecase.dart';
 import 'package:neostore/presentation/my_order/controller/order_detail/order_detail_events.dart';
@@ -12,14 +13,14 @@ class OrderDetailBloc extends Bloc<OrderDetailEvent, OrderDetailState> {
       : _useCase = getSelectedOrderDetailUseCase,
         super(OrderDetailInitState()) {
     on<FetchOrderDetailEvent>((event, emit) async {
-      print(event);
+      debugPrint(event.toString());
       emit(OrderDetailLoadingState());
       _orderId = event.orderId;
       final response = await _useCase.getProductDetail(orderId: event.orderId);
       response.fold((left) {
         emit(OrderDetailFetchFailedState(failure: left));
       }, (right) {
-        print(right);
+        debugPrint(right.toString());
         emit(OrderDetailFetchSuccessState(order: right));
       });
     });

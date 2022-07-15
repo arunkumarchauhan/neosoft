@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:neostore/domain/usecases/cart/get_cart_items_usecase.dart';
 import 'package:neostore/presentation/cart/controller/cart_list_events.dart';
@@ -10,14 +11,14 @@ class CartListBloc extends Bloc<CartListEvent, CartListState> {
       : _useCase = cartItemsUseCase,
         super(CartListInitState()) {
     on<FetchCartItemsEvent>((event, emit) async {
-      print(event);
+      debugPrint(event.toString());
       emit(CartListLoadingState());
       final response = await _useCase.getCartItemsList();
       response.fold((left) {
-        print(left.message);
+        debugPrint(left.message);
         emit(CartListFetchFailedState(failure: left));
       }, (right) {
-        print(right);
+        debugPrint(right.toString());
         if (!(right.count == null) && right.count! > 0) {
           itemCount = 2;
         }

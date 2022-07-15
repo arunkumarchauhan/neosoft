@@ -291,7 +291,7 @@ class HomeScreen extends StatelessWidget {
         Navigator.pushNamed(context, AppRouter.my_cart);
         return;
       default:
-        print("No Actions performed");
+        debugPrint("No Actions performed");
     }
   }
 

@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:neostore/domain/entity/product/product_list_item_entity.dart';
 import 'package:neostore/domain/usecases/product/get_selected_category_product_list.dart';
@@ -31,7 +32,7 @@ class ProductListingBloc
             getSelectedCategoryProductListUseCase,
         super(ProductListInitializationState()) {
     on<InitiateProductListFetchEvent>((event, emit) async {
-      print(event);
+      debugPrint(event.toString());
       emit(ProductListLoadingState());
       _categoryId = event.productCategoryId;
       productEnded = false;
@@ -43,18 +44,18 @@ class ProductListingBloc
               limit: _limit);
 
       response.fold((left) {
-        print("Failure ${left.message}");
+        debugPrint("Failure ${left.message}");
         emit(ProductListFetchFailedState(failure: left));
       }, (right) {
         products = right;
-        print("Initial Product Length ${products.length}");
+        debugPrint("Initial Product Length ${products.length}");
         emit(ProductListFetchSuccessState(products: products));
       });
     });
 
     on<FetchMoreProductsListEvent>((event, emit) async {
       emit(ProductListRefetchLoadingState(products: products));
-      print(
+      debugPrint(
           "${event}, productCategoryId : $_categoryId , limit :$_limit , page : $_page ");
       int page = products.length ~/ 10 + 1;
       final response =
@@ -64,14 +65,14 @@ class ProductListingBloc
               limit: _limit);
 
       response.fold((left) {
-        print(left.message);
+        debugPrint(left.message);
         emit(ProductListFetchFailedState(failure: left));
       }, (right) {
         if (right.length < 10) {
           productEnded = true;
         }
         products.addAll(right);
-        print("Product Length ${products.length}");
+        debugPrint("Product Length ${products.length}");
         emit(ProductListFetchSuccessState(products: products));
       });
     }, transformer: debounce(const Duration(seconds: 1)));

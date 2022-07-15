@@ -39,7 +39,7 @@ class AddressListTile extends StatelessWidget {
             Container(
               color: Colors.white,
               width: 800.w,
-              height: 300.h,
+              height: 130,
               padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -78,7 +78,7 @@ class AddressListTile extends StatelessWidget {
           right: 5,
           child: IconButton(
               onPressed: () {
-                print("Pressed");
+                debugPrint("Pressed");
               },
               icon: Icon(
                 Icons.cancel,

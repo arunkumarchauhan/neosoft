@@ -55,7 +55,7 @@ class AddressListScreen extends StatelessWidget {
                 height: 30,
               ),
               SizedBox(
-                height: 250.h,
+                height: 90,
                 child: RedBackgroundWhiteTextElevatedButton(
                     text: "PLACE ORDER", onPressed: () {}),
               ),

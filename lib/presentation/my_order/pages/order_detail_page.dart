@@ -42,7 +42,7 @@ class OrderDetailPage extends StatelessWidget {
       ),
       body: BlocBuilder<OrderDetailBloc, OrderDetailState>(
           builder: (BuildContext context, OrderDetailState state) {
-        print(state);
+        debugPrint(state.toString());
         if (state is OrderDetailLoadingState) {
           return const Center(
             child: CircularProgressIndicator(),

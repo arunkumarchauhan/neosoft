@@ -37,6 +37,9 @@ ThemeData buildThemeData() {
         fontFamily: 'Gotham',
         fontSize: 18,
       ),
+      errorBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: Colors.white),
+      ),
       errorStyle: TextStyle(color: Colors.white),
       border: OutlineInputBorder(
         borderSide: BorderSide(color: Colors.white),

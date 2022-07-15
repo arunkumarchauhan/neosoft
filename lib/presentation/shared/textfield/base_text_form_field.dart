@@ -28,17 +28,18 @@ class BaseTextFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 200.h,
-      padding: EdgeInsets.symmetric(horizontal: 40.w),
+      height: 80,
+      padding: const EdgeInsets.symmetric(horizontal: 15),
       child: TextFormField(
+        cursorColor: Colors.black,
         enabled: enabled,
         onChanged: onChanged == null ? null : (value) => onChanged!(value),
         style: TextStyle(
-          color: textColor ?? Colors.white,
-          fontSize: 20,
-          fontWeight: FontWeight.w500,
-          fontFamily: "Gotham",
-        ),
+            color: textColor ?? Colors.white,
+            fontSize: 20,
+            fontWeight: FontWeight.w500,
+            fontFamily: "Gotham",
+            height: 1.35),
         obscureText: obscureText ?? false,
         validator: validator == null
             ? (String? str) {}

@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:either_dart/src/either.dart';
+import 'package:flutter/material.dart';
 import 'package:neostore/datasources/remote/implementation/product_api_service.dart';
 import 'package:neostore/data/mapper/product_mapper.dart';
 import 'package:neostore/domain/repositories/product_repository.dart';
@@ -50,10 +51,10 @@ class ProductRepositoryImplementation extends ProductRepository {
       } else if (e.response?.statusCode == 401) {
         return Right([]);
       }
-      print(e);
+      debugPrint(e.toString());
       return Left(Failure("Something Went Wrong"));
     } catch (e) {
-      print("Exception $e");
+      debugPrint("Exception $e");
 
       return Left(Failure("${e.toString().substring(0, 100)}"));
     }

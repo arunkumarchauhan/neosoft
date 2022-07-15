@@ -25,6 +25,10 @@ class ForgotPasswordScreen extends StatelessWidget {
             size: 25,
           ),
         ),
+        title: Text(
+          "Forgot Password",
+          style: Theme.of(context).textTheme.headline2,
+        ),
       ),
       backgroundColor: Theme.of(context).primaryColor,
       body: SingleChildScrollView(

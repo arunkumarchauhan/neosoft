@@ -22,12 +22,12 @@ class LoginScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Theme.of(context).primaryColor,
       body: SingleChildScrollView(
-        child: Container(
-          margin: EdgeInsets.symmetric(horizontal: 40.w),
-          height: ScreenUtil.defaultSize.height,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisSize: MainAxisSize.max,
             children: [
               Column(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -52,6 +52,7 @@ class LoginScreen extends StatelessWidget {
                       userLoginCredError = state.userLoginCredError;
                     }
 
+                    debugPrint(state.toString());
                     return Column(
                       children: [
                         BaseTextFormField(
@@ -98,6 +99,9 @@ class LoginScreen extends StatelessWidget {
                     );
                   }),
                 ],
+              ),
+              const SizedBox(
+                height: 50,
               ),
               Padding(
                 padding: EdgeInsets.only(bottom: 20.h),

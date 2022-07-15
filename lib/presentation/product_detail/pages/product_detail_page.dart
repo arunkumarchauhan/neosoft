@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:neostore/domain/entity/product/product_detail_entity.dart';
 import 'package:neostore/presentation/product_detail/controller/product_detail_bloc.dart';
 import 'package:neostore/presentation/product_detail/controller/product_detail_state.dart';
 import 'package:neostore/presentation/product_detail/model/product.dart';
@@ -137,7 +136,7 @@ class ProductDetailPage extends StatelessWidget {
                   ),
                   Container(
                     color: Colors.white,
-                    height: 250.h,
+                    height: 95,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -170,8 +169,10 @@ class ProductDetailPage extends StatelessWidget {
                               context: context,
                               builder: (BuildContext context) {
                                 return AlertDialog(
-                                  content: _buildAlertItems(
-                                      product, _rateNowSpecificWidget(product)),
+                                  content: SingleChildScrollView(
+                                    child: _buildAlertItems(product,
+                                        _rateNowSpecificWidget(product)),
+                                  ),
                                 );
                               },
                             );
@@ -230,11 +231,11 @@ class ProductDetailPage extends StatelessWidget {
                     )
                 ],
               ),
-              SizedBox(
-                height: 36.h,
+              const SizedBox(
+                height: 16,
               ),
               SizedBox(
-                  height: 250.h,
+                  height: 95,
                   width: 700.w,
                   child: RedBackgroundWhiteTextElevatedButton(
                       text: "RATE NOW", onPressed: () {}))
@@ -257,12 +258,12 @@ class ProductDetailPage extends StatelessWidget {
               fontSize: 20,
               fontFamily: "Gotham"),
         ),
-        SizedBox(
-          height: 40.h,
+        const SizedBox(
+          height: 20,
         ),
         Container(
           width: 350.w,
-          height: 180.h,
+          height: 60,
           decoration: BoxDecoration(
             border: Border.all(
               color: Colors.green,
@@ -290,7 +291,7 @@ class ProductDetailPage extends StatelessWidget {
           height: 25.h,
         ),
         SizedBox(
-          height: 250.h,
+          height: 95,
           width: 500.w,
           child: RedBackgroundWhiteTextElevatedButton(
             text: "SUBMIT",
@@ -331,7 +332,7 @@ class ProductDetailPage extends StatelessWidget {
           ),
           child: Image.network(
             product.productImages[0].image!,
-            height: 534.h,
+            height: 200,
             width: 900.w,
             fit: BoxFit.fill,
           ),

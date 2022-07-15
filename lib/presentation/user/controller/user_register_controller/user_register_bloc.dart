@@ -11,7 +11,6 @@ class UserRegistrationBloc extends Bloc<UserRegisterEvent, UserRegisterState> {
       UserEntity userRegisterError = UserEntity();
       emit(ValidatingRegisterInputState());
       if (event.user.firstName == null || event.user.firstName!.isEmpty) {
-        print(event.user.firstName);
         userRegisterError.firstName = "Invalid First Name";
         emit(InvalidUserRegisterInputState(
             userRegisterError: userRegisterError));

@@ -76,9 +76,10 @@ class _ProductListPageState extends State<ProductListPage> {
       ),
       body: BlocBuilder<ProductListingBloc, ProductListingState>(
           builder: (context, state) {
-        print(state);
+        debugPrint(state.toString());
         if (state is ProductListFetchSuccessState) {
           return ListView.separated(
+              shrinkWrap: true,
               controller: _scrollController,
               itemBuilder: (context, index) {
                 final product = state.products[index];
@@ -94,6 +95,7 @@ class _ProductListPageState extends State<ProductListPage> {
               itemCount: state.products.length);
         } else if (state is ProductListRefetchLoadingState) {
           return ListView.separated(
+              shrinkWrap: true,
               controller: _scrollController,
               itemBuilder: (context, index) {
                 final product = state.products[index];
@@ -133,10 +135,9 @@ class _ProductListPageState extends State<ProductListPage> {
         Navigator.pushNamed(context, AppRouter.product_detail);
       },
       child: Container(
-        height: 400.h,
         padding: EdgeInsets.all(20.w),
         child: Row(
-          mainAxisSize: MainAxisSize.min,
+          mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
@@ -166,50 +167,43 @@ class _ProductListPageState extends State<ProductListPage> {
                   SizedBox(
                     height: 80.w,
                   ),
-                  Flexible(
-                    child: Text(product.name,
-                        overflow: TextOverflow.ellipsis,
-                        style: kListTitleTextStyle),
-                  ),
+                  Text(product.name,
+                      overflow: TextOverflow.ellipsis,
+                      style: kListTitleTextStyle),
                   SizedBox(
                     height: 24.w,
                   ),
-                  Flexible(
-                    child: Text(
-                      product.producer,
-                      overflow: TextOverflow.ellipsis,
-                      style: kListSubTitleTextStyle,
-                    ),
+                  Text(
+                    product.producer,
+                    overflow: TextOverflow.ellipsis,
+                    style: kListSubTitleTextStyle,
                   ),
                   SizedBox(
                     height: 50.h,
                   ),
-                  Flexible(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Text(
-                          "Rs.${product.cost}",
-                          overflow: TextOverflow.ellipsis,
-                          style: kListPriceSubTitle,
-                        ),
-                        Container(
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              for (int rate = 1; rate <= 5; rate++)
-                                Icon(
-                                  Icons.star,
-                                  size: 20,
-                                  color: Colors.green.withOpacity(
-                                      rate <= product.rating ? 1 : 0.5),
-                                ),
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Text(
+                        "Rs.${product.cost}",
+                        overflow: TextOverflow.ellipsis,
+                        style: kListPriceSubTitle,
+                      ),
+                      Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          for (int rate = 1; rate <= 5; rate++)
+                            Icon(
+                              Icons.star,
+                              size: 20,
+                              color: Colors.green.withOpacity(
+                                  rate <= product.rating ? 1 : 0.5),
+                            ),
+                        ],
+                      )
+                    ],
                   ),
                   SizedBox(
                     height: 24.w,

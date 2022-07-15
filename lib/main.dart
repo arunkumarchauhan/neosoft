@@ -23,6 +23,7 @@ import 'package:neostore/presentation/user/page/login_screen.dart';
 import 'package:neostore/presentation/user/page/my_account_screen.dart';
 import 'package:neostore/presentation/user/page/register_screen.dart';
 import 'package:neostore/presentation/user/page/reset_password_screen.dart';
+import 'package:neostore/utils/route_generator.dart';
 import 'di/injection.dart' as di;
 import 'package:neostore/utils/app_router.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -79,21 +80,7 @@ class MyApp extends StatelessWidget {
               title: 'Flutter Demo',
               theme: buildThemeData(),
               initialRoute: AppRouter.home,
-              routes: {
-                AppRouter.login: (_) => LoginScreen(),
-                AppRouter.register: (_) => Register(),
-                AppRouter.forgot_password: (_) => ForgotPasswordScreen(),
-                AppRouter.home: (_) => const HomeScreen(),
-                AppRouter.reset_password: (_) => const ResetPasswordScreen(),
-                AppRouter.product_list: (_) => ProductListPage(),
-                AppRouter.product_detail: (_) => ProductDetailPage(),
-                AppRouter.my_orders: (_) => const MyOrdersListPage(),
-                AppRouter.order_detail: (_) => const OrderDetailPage(),
-                AppRouter.my_cart: (_) => MyCartPage(),
-                AppRouter.add_address: (_) => AddAddressScreen(),
-                AppRouter.list_address: (_) => const AddressListScreen(),
-                AppRouter.my_account: (_) => MyAccount(),
-              },
+              onGenerateRoute: RouteGenerator.generateRoute,
             );
           }),
     );

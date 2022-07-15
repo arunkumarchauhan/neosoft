@@ -84,7 +84,7 @@ class Register extends StatelessWidget {
                         onChanged: (value) => _handleFormChange(context),
                       ),
                       const SizedBox(
-                        height: 20,
+                        height: 8,
                       ),
                       BaseTextFormField(
                         controller: _lastNameController,
@@ -94,7 +94,7 @@ class Register extends StatelessWidget {
                         onChanged: (value) => _handleFormChange(context),
                       ),
                       const SizedBox(
-                        height: 20,
+                        height: 8,
                       ),
                       BaseTextFormField(
                         controller: _emailController,
@@ -104,7 +104,7 @@ class Register extends StatelessWidget {
                         onChanged: (value) => _handleFormChange(context),
                       ),
                       const SizedBox(
-                        height: 20,
+                        height: 8,
                       ),
                       BaseTextFormField(
                         controller: _passwordController,
@@ -115,7 +115,7 @@ class Register extends StatelessWidget {
                         onChanged: (value) => _handleFormChange(context),
                       ),
                       const SizedBox(
-                        height: 20,
+                        height: 8,
                       ),
                       BaseTextFormField(
                         controller: _confirmPasswordController,
