@@ -9,10 +9,8 @@ class GetSelectedCategoryProductListUseCase {
       {required ProductRepository productRepository})
       : _productRepository = productRepository;
   Future<Either<Failure, List<ProductListItemEntity>>> getProductsList(
-      {required int productCategoryId, int limit = 10, int page = 1}) async {
-    final res = await _productRepository.getProductsList(
+      {required int productCategoryId, int limit = 10, int page = 1}) {
+    return _productRepository.getProductsList(
         productCategoryId: productCategoryId, limit: limit, page: page);
-
-    return res;
   }
 }

@@ -8,7 +8,7 @@ class GetSelectedOrderDetailUseCase {
   GetSelectedOrderDetailUseCase({required OrderRepository orderRepository})
       : _orderRepository = orderRepository;
   Future<Either<Failure, OrderDetailMetaDataEntity>> getProductDetail(
-      {required int orderId}) async {
-    return await _orderRepository.getOrderDetail(orderId: orderId);
+      {required int orderId}) {
+    return _orderRepository.getOrderDetail(orderId: orderId);
   }
 }

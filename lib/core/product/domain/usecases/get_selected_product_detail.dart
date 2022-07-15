@@ -9,7 +9,7 @@ class GetSelectedProductDetailUseCase {
       {required ProductRepository productRepository})
       : _productRepository = productRepository;
   Future<Either<Failure, ProductDetailEntity>> getProductDetail(
-      {required int productId}) async {
-    return await _productRepository.getProductDetail(productId: productId);
+      {required int productId}) {
+    return _productRepository.getProductDetail(productId: productId);
   }
 }

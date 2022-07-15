@@ -47,8 +47,6 @@ class ProductRepositoryImplementation extends ProductRepository {
       } else {
         return Left(Failure("${response.status} : ${response.userMessage}"));
       }
-    } on SocketException {
-      return Left(Failure("No Internet"));
     } on DioError catch (e) {
       if (e.type == DioErrorType.connectTimeout) {
         return Left(Failure("Connection Timeout"));

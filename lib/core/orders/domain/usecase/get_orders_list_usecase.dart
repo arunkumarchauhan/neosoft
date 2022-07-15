@@ -9,9 +9,7 @@ class GetOrderstListUseCase {
   OrderRepository _orderRepository;
   GetOrderstListUseCase({required OrderRepository orderRepository})
       : _orderRepository = orderRepository;
-  Future<Either<Failure, List<OrderListItemEntity>>> getOrdersList() async {
-    final res = await _orderRepository.getOrdersList();
-
-    return res;
+  Future<Either<Failure, List<OrderListItemEntity>>> getOrdersList() {
+    return _orderRepository.getOrdersList();
   }
 }
